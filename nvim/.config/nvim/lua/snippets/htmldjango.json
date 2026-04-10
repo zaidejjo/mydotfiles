@@ -1,0 +1,27 @@
+{
+  "Load Static": {
+    "prefix": "load",
+    "body": "{% load static %}",
+    "description": "Load Django static tag"
+  },
+  "URL Tag": {
+    "prefix": "url",
+    "body": "{% url '${1:view_name}' $0 %}",
+    "description": "Django URL tag"
+  },
+  "If Statement": {
+    "prefix": "if",
+    "body": ["{% if ${1:condition} %}", "\t$0", "{% endif %}"],
+    "description": "Django if statement"
+  },
+  "For Loop": {
+    "prefix": "for",
+    "body": ["{% for ${1:item} in ${2:list} %}", "\t$0", "{% endfor %}"],
+    "description": "Django for loop"
+  },
+  "Block Tag": {
+    "prefix": "block",
+    "body": ["{% block ${1:content} %}", "\t$0", "{% endblock %}"],
+    "description": "Django block"
+  }
+}
