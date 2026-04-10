@@ -13,7 +13,7 @@
     }
 },
 "display": {
-    "separator": " ➜ ",
+    "separator": " ",
     "color": {
         "keys": "magenta",   // لون المفاتيح (Pink/Magenta)
         "title": "blue"      // لون الاسم (Sapphire)
@@ -22,32 +22,30 @@
 "modules": [
     {
         "type": "title",
-        "format": "{user-name}@{host-name}"
+        "format": "\u001b[34m{user-name}\u001b[37m@\u001b[36m{host-name}"
     },
-    {
-        "type": "os",
-        "key": "󰣇 OS", // أيقونات لطيفة
-        "keyColor": "blue"
-    },
-    {
-        "type": "kernel",
-        "key": "  KN",
-        "keyColor": "magenta"
-    },
-    {
-        "type": "uptime",
-        "key": "󱎫 UP",
-        "keyColor": "yellow"
-    },
-    {
-        "type": "memory",
-        "key": "󰍛 MEM",
-        "keyColor": "green"
-    },
+    "separator",
+    { "type": "os", "key": "󰣇 OS", "keyColor": "blue" },
+    { "type": "kernel", "key": " KN", "keyColor": "magenta" },
+    // { "type": "uptime", "key": "󱎫 UP", "keyColor": "yellow" },
+    { "type": "packages", "key": "󰏖 PKG", "keyColor": "cyan" },
     "break",
-    {
-        "type": "colors",
-        "symbol": "circle" // دوائر الألوان بدل المربعات
-    }
+    { "type": "cpu", "key": "󰻠 CP", "keyColor": "red" },
+    // { "type": "gpu", "key": "󰢮 GP", "keyColor": "green" },
+    { "type": "memory", "key": "󰍛 ME", "keyColor": "green" },
+    { "type": "swap", "key": "󰓡 SW", "keyColor": "yellow" },
+    { "type": "disk", "key": "󱛟 DSK", "keyColor": "magenta", "folders": "/"},
+    "break",
+    
 ]
 }
+
+// { "type": "de", "key": "󰖲 DE", "keyColor": "blue" },
+// { "type": "wm", "key": " WM", "keyColor": "blue" },
+// { "type": "terminal", "key": " TR", "keyColor": "magenta" },
+// { "type": "shell", "key": " SH", "keyColor": "magenta" },
+
+// {
+//         "type": "colors",
+//         "symbol": "circle"
+//     }

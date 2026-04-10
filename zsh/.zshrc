@@ -1,145 +1,121 @@
-# ~/.zshrc: نسخة منظمة وسريعة
+#  ~/.zshrc - النسخة المحسنة والمنظمة
 
-# --------- Theme ----------
-# jonathan
-ZSH_THEME="af-magic"
-
-# --------- فقط للتفاعلي ----------
+# 1. الإعدادات الأساسية والسرعة
 [[ -o interactive ]] || return
 
+# تسريع تشغيل التحميل
+autoload -Uz compinit && compinit -u
+
+# 2. المسارات (Paths) - مجمعة في مكان واحد
+export PATH="$HOME/.local/bin:/opt/cmake/bin:$HOME/.npm-global/bin:$PATH"
+if [ -d "/home/linuxbrew/.linuxbrew" ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 
-# --------- Aliases سريعة للنظام ----------
-alias ؤمس='clear'
-alias cls='clear'
-alias l='ls -CF'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias meminfo='free -h'
-alias cpuinfo='lscpu'
-alias dfh='df -h'
-alias top10='top -o %MEM | head -n 12'
-alias jl='jupyter-lab'
 
-# --------- Zsh completion + plugins ----------
-autoload -Uz compinit
-compinit -u          # ignore unsafe files
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting history-substring-search sudo fzf-tab)
-setopt auto_menu      # Tab يفتح menu للتكملة
-
-# --------- History محسّن ----------
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt append_history
-setopt share_history
-setopt inc_append_history
-setopt hist_ignore_dups
-setopt hist_reduce_blanks
-
-# --------- Git branch helper ----------
-parse_git_branch() { git rev-parse --abbrev-ref HEAD 2>/dev/null }
-
-# --------- oh-my-zsh ----------
+# 3. الإضافات والثيم (Oh My Zsh & Starship)
 export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="af-magic" # سيعلوه Starship لاحقاً
 ZSH_DISABLE_COMPFIX=true
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting history-substring-search sudo fzf-tab)
 source $ZSH/oh-my-zsh.sh
 
-# --------- NVM ----------
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# 4. إعدادات الـ FZF المتقدمة (الألوان والمعاينة)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export FZF_DEFAULT_COMMAND="fdfind --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fdfind --type=d --hidden --strip-cwd-prefix --exclude .git"# ألوان جذابة لـ FZF
+# export FZF_DEFAULT_OPTS="--color=fg:#CBE0F0,bg:#011628,hl:#B388FF,fg+:#CBE0F0,bg+:#143652,hl+:#B388FF,info:#06BCE4,prompt:#2CF9ED,pointer:#2CF9ED,marker:#2CF9ED,spinner:#2CF9ED,header:#2CF9ED"
 
-# --------- Git Aliases ----------
-alias gt='git status'
-alias gl='git log --oneline --graph --decorate --all'
-alias ga='git add'
-alias gaa='git add .'
-alias gc='git commit -v'
-alias gcm='git commit -m'
-alias gp='git push'
-alias gpl='git pull'
-alias gco='git checkout'
-alias gcb='git checkout -b'
-alias gb='git branch'
-alias gba='git branch -a'
+# --- Catppuccin Mocha for FZF ---
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else batcat -n --color=always --line-range :500 {}; fi"
+export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+# أضف هذا السطر بعد سطر 37 مثلاً
+bindkey '^P' fzf-file-widget
+bindkey '^H' backward-kill-word       # Ctrl+Backspace
+bindkey '^[^[[3;5~' kill-word         # Ctrl+Delete
+bindkey '^Z' undo                      # Ctrl+Z = Undo للسطر الحالي
 
-# --------- PATHs ----------
-export PATH=$HOME/.local/bin:$PATH
-export PATH=/opt/cmake/bin:$PATH
-
-alias python=python3.12
-alias py=python3.12
+# 5. الـ Aliases (منظمة حسب النوع)
+# --- النظام ---
+alias ؤمس='clear'
+alias cls='clear'
+alias ..='cd ..'
+alias ...='cd ../..'
 alias update='sudo apt update && sudo apt upgrade -y'
 alias clean='sudo apt autoremove -y && sudo apt autoclean'
-
-# --------- C++ Run and Compile function ----------
-crun () {
-    g++ -std=c++17 "$1" -o "${1%.cpp}" && "./${1%.cpp}"
-}
-
-# --------Django shortcauts --------
-alias runserver='python manage.py runserver'
-alias urunserver='uv run python manage.py runserver'
-alias check='python manage.py check'
-alias dshell='python manage.py shell'
-alias makemig='python manage.py makemigrations'
-alias mig='python manage.py migrate'
-alias colstc='python manage.py collectstatic'
-alias crtuser='python manage.py createsuperuser'
-alias crtapp='python manage.py startapp'
-
-alias sr='rg'
-alias bat='batcat'
-alias cat='batcat --paging=never'
-alias fd='fdfind'
-alias act='source .venv/bin/activate'
-alias mkvenv='virtualenv'
-alias taalomi='cd Taalomi-fi-yadi/school_portal/'
-alias spsql='sudo systemctl start postgresql'
-
-export PATH="$HOME/.npm-global/bin:$PATH"
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-
-eval "$(starship init zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-
-
+alias sai='sudo apt install'
+alias rm='trash-put'
+alias reload='source ~/.zshrc'
+alias v='nvim'
+alias vf='fzf | xargs -r nvim'
 alias nsch='nvim $(fzf --preview="batcat --color=always {}")'
 alias zsch='zed $(fzf --preview="batcat --color=always {}")'
-alias v='nvim'
+alias copy='xsel --input --clipboard'
+alias paste='xsel --output --clipboard'
+# --- الأدوات البديلة (Modern Tools) ---
+alias ls='eza --icons --color=always --group-directories-first'
+alias ll='eza -alh --icons --color=always --group-directories-first --git'
+alias la='eza -a --icons --color=always'
+alias tree='eza -T'
+alias cat='batcat --paging=never'
+alias bat='batcat'
+alias fd='fdfind'
+alias jl='jupyter-lab'
 
+# --- البرمجة (Python, Django, C++) ---
+alias python=python3.12
+alias py=python3.12
+alias act='source .venv/bin/activate'
+alias runserver='python manage.py runserver'
+alias urunserver='uv run python manage.py runserver'
+alias makemig='python manage.py makemigrations'
+alias mig='python manage.py migrate'
 
+alias mkvenv='virtualenv'
+alias spsql='sudo systemctl start postgresql'
+
+crun () { g++ -std=c++17 "$1" -o "${1%.cpp}" && "./${1%.cpp}"; }
+
+# 6. الدوال الذكية (Functions)
+# مدير الملفات Yazi مع الانتقال للمسار عند الخروج
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# البحث داخل الملفات وفتح نيو فيم
 fif() {
-  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
   rg --files-with-matches --no-messages "$1" | \
-    fzf --preview "rg --ignore-case --pretty --context 10 '$1' {}" \
-        --bind "enter:execute(nvim {})"
+    fzf --preview "rg --ignore-case --pretty --context 10 '$1' {}" | xargs -r nvim
 }
-
-rgnvim() {
-  local selected file line
-  selected=$(rg "$1" | fzf) || return
-  file=$(echo "$selected" | cut -d: -f1)
-  line=$(echo "$selected" | cut -d: -f2)
-  nvim +"$line" "$file"
+# البحث التفاعلي داخل النصوص (Interactive Ripgrep)
+frg() {
+  local RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/'"
+  local INITIAL_QUERY="${*:-}"
+  
+  fzf --ansi --disabled --query "$INITIAL_QUERY" \
+      --bind "start:reload:$RG_PREFIX {q}" \
+      --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+      --delimiter : \
+      --preview 'batcat --color=always --highlight-line {2} --style=numbers {1}' \
+      --preview-window 'up,60%,border-bottom,+{2}+3/3' \
+      --bind 'enter:become(nvim +{2} {1})'
 }
-
-rgzed() {
-  local selected file line
-  selected=$(rg --vimgrep "$*" | fzf) || return
-  file=$(printf '%s\n' "$selected" | awk -F: '{print $1}')
-  line=$(printf '%s\n' "$selected" | awk -F: '{print $2}')
-  zed -- "$file:$line"
-}
-
-zf() {
-  local file
-  file=$(fd . | fzf) || return
-  zed "$file"
-}
-
 fh() {
   history | fzf
 }
@@ -149,66 +125,32 @@ local cmd
   cmd=$(history | fzf | sed 's/^[ ]*[0-9]\+[ ]*//') || return
   eval "$cmd"
 }
+# 7. إعدادات الـ History
+HISTSIZE=10000
+SAVEHIST=10000
+setopt share_history append_history inc_append_history hist_ignore_dups
 
+# 8. تفعيل الأدوات (مرة واحدة فقط لسرعة التشغيل)
+eval "$(starship init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
-venvnear() {
-  local venv
-  venv=$(
-    find . .. -type d \( -name venv -o -name .venv \) 2>/dev/null |
-    awk '!seen[$0]++' |
-    sort |
-    fzf --prompt="Select venv > "
-  ) || return
-  source "$venv/bin/activate"
-}
-
-# ===== LS with exa =====
-alias ls='eza --icons --color=always --group-directories-first'
-alias ll='eza -alh --icons --color=always --group-directories-first --git'
-alias la='eza -a --icons --color=always'
-alias tree='eza -T'
-alias sai='sudo apt install'
-alias rm='trash-put'
-# # Auto-start tmux
-# if command -v tmux >/dev/null 2>&1; then
-#   if [ -z "$TMUX" ]; then
-#     tmux attach -t main || tmux new -s main
-#   fi
-# fi
-#
-alias copy='xsel --input --clipboard'
-alias paste='xsel --output --clipboard'
-alias reload='source ~/.zshrc'
-
-# --------- حذف كلمة أو Undo ----------
-bindkey '^H' backward-kill-word       # Ctrl+Backspace
-bindkey '^[^[[3;5~' kill-word         # Ctrl+Delete
-bindkey '^Z' undo                      # Ctrl+Z = Undo للسطر الحالي
-
-
-
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# إعدادات ألوان fzf-tab (اختياري لكنه يجعله أجمل)
-zstyle ':fzf-tab:*' fzf-command fzf
-zstyle ':fzf-tab:*' fzf-preview 'eza --icons --color=always $realpath'
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --icons --color=always $realpath'
-
-# 1. أولاً: تعريف المسارات (PATHs) ليعرف النظام أين توجد البرامج
-export PATH="$HOME/.local/bin:$PATH"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# 2. ثانياً: تفعيل thefuck (بعد التأكد أن المسارات أصبحت معروفة)
 if command -v thefuck >/dev/null 2>&1; then
-    eval "$(thefuck --alias)"
-    eval "$(thefuck --alias fuck)"
+    eval "$(thefuck --alias fk)"
 fi
 
-eval "$(thefuck --alias)"
-eval "$(thefuck --alias fk)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
-eval $(thefuck --alias)
+# 9. اللمسات النهائية
 export BAT_THEME="Catppuccin Mocha"
+
+# تفعيل إضافة تعديل الأوامر
+autoload -U edit-command-line
+zle -N edit-command-line
+
+# ربطها باختصار (هنا استخدمنا Alt + e)
+bindkey '^[e' edit-command-line
 
 fastfetch
