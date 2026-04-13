@@ -34,6 +34,9 @@ config.colors = {
 		"#A6ADC8", -- bright white
 	},
 }
+
+-- color_scheme = 'Catppuccin Mocha',
+
 -- config.colors = {
 -- 	foreground = "#CBE0F0",
 -- 	background = "#011423",
@@ -79,11 +82,11 @@ config.keys = {
 	{ key = "e", mods = "CTRL|SHIFT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	-- غلق الـ Pane الحالي
 	{ key = "w", mods = "CTRL|SHIFT", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
-  { 
-        key = 'z', 
-        mods = 'CTRL|SHIFT', 
-        action = wezterm.action.TogglePaneZoomState 
-    },
+	{
+		key = "z",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.TogglePaneZoomState,
+	},	
 }
 
 config.front_end = "WebGpu"

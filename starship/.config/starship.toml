@@ -74,7 +74,8 @@ style = "bg:surface0 fg:text"
 
 [os.symbols]
 Windows = "󰍲"
-Ubuntu = "󰕈"
+# Ubuntu = "󰣇 󰕈"
+Ubuntu = " 󱄛"
 SUSE = ""
 Raspbian = "󰐿"
 Mint = "󰣭"
@@ -111,6 +112,8 @@ truncation_symbol = "…/"
 "Music" = "󰝚 "
 "Pictures" = " "
 "Developer" = "󰲋 "
+"Programming" = ""
+"Desktop" = ""
 
 [git_branch]
 symbol = ""
