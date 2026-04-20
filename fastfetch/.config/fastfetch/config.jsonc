@@ -35,6 +35,7 @@
     { "type": "memory", "key": "󰍛 ME", "keyColor": "green" },
     { "type": "swap", "key": "󰓡 SW", "keyColor": "yellow" },
     { "type": "disk", "key": "󱛟 DSK", "keyColor": "magenta", "folders": "/"},
+    { "type": "uptime", "key": "󱎫 UP", "keyColor": "blue" },
     "break",
     
 ]

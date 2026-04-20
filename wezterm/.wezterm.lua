@@ -58,7 +58,7 @@ config.font = wezterm.font_with_fallback({
 })
 config.font_size = 12
 config.bidi_enabled = true
-config.enable_tab_bar = false
+config.enable_tab_bar = true
 
 config.window_background_opacity = 0.85
 config.macos_window_background_blur = 20 -- لمستخدمي الماك
