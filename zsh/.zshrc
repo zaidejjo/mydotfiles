@@ -12,6 +12,7 @@ if [ -d "/home/linuxbrew/.linuxbrew" ]; then
 fi
 
 export EDITOR='nvim'
+alias snvim="sudoedit"
 export VISUAL='nvim'
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 
@@ -20,7 +21,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="af-magic" # سيعلوه Starship لاحقاً
 ZSH_DISABLE_COMPFIX=true
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting history-substring-search sudo fzf-tab)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting history-substring-search sudo fzf-tab archlinux uv)
 source $ZSH/oh-my-zsh.sh
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -65,14 +66,13 @@ bindkey '^[^[[3;5~' kill-word         # Ctrl+Delete
 bindkey '^Z' undo                      # Ctrl+Z = Undo للسطر الحالي
 
 # --- النظام ---
-alias py='python3'
 alias ؤمس='clear'
 alias cls='clear'
 alias ؤي='cd'
 alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
+alias .3='cd ../..'
+alias .4='cd ../../..'
+alias .5='cd ../../../..'
 alias update='sudo pacman -Syu'
 alias clean='sudo apt autoremove -y && sudo apt autoclean'
 alias ins='sudo pacman -S'
@@ -95,19 +95,58 @@ alias fref='nvim $(rg --line-number --column --no-heading --color=always --smart
 alias fcp='fzf --preview "bat --color=always {}" | xclip -selection clipboard'
 
 
+# --- UV & Python Optimized ---
+alias pip='uv pip'
+alias venv='uv venv'
+alias py='uv run python'
+alias uinst='uv add'
+alias urm='uv remove'
+alias dj='uv run manage.py'
+alias drun='uv run manage.py runserver'
+alias dmm='uv run manage.py makemigrations'
+alias dmig='uv run manage.py migrate'
+alias dsh='uv run manage.py shell'
+alias dbsh='uv run manage.py dbshell'
+alias dsu='uv run manage.py createsuperuser'
+alias dcolstc='uv run manage.py collectstatic'
 # --- البرمجة (Python, Django, C++) ---
-alias runserver='python manage.py runserver'
-alias urunserver='uv run python manage.py runserver'
-alias makemig='python manage.py makemigrations'
-alias mig='python manage.py migrate'
-alias shell='python manage.py shell'
-alias dbshell='python manage.py dbshell'
-alias colstc='python manage.py collectstatic'
 
-alias mkvenv='virtualenv'
+alias runserver='python manage.py runserver'
+
 alias spsql='sudo systemctl start postgresql'
 
+
+# Docs
+alias mergeall='mkdir -p temp_pdf && libreoffice --headless --convert-to pdf *.* --outdir temp_pdf && gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=Merged_Files_$(date +%Y%m%d_%H%M%S).pdf temp_pdf/*.pdf && rm -rf temp_pdf'
+
+
+
+# 2. وظيفة الإكمال
+_django_custom_completion() {
+    local -a commands
+    commands=(
+        'runserver' 'makemigrations' 'migrate' 'shell' 
+        'dbshell' 'collectstatic' 'createsuperuser' 
+        'check' 'test' 'showmigrations'
+    )
+    _describe -t commands 'Django Commands' commands
+}
+
+# 3. إجبار fzf-tab و zsh على تجاهل الملفات تماماً لـ dj
+# هذا السطر يخبر النظام: عند إكمال dj، استخدم وظيفة الإكمال فقط ولا تحاول تخمين ملفات
+zstyle ':completion:*:*:dj:*' file-patterns ''
+zstyle ':completion:*:*:dj:*' menu yes select
+
+# 4. ربط الوظيفة
+compdef _django_custom_completion dj
+
 crun () { g++ -std=c++17 "$1" -o "${1%.cpp}" && "./${1%.cpp}"; }
+
+alias ytdl='yt-dlp -f "bestvideo+bestaudio/best" --merge-output-format mp4'
+alias yt-mp3='yt-dlp -x --audio-format mp3 --audio-quality 0'
+alias yt-playlist='yt-dlp -i -x --audio-format mp3 --yes-playlist'
+alias yt-up='sudo yt-dlp -U'
+
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -296,12 +335,31 @@ _fzf_grep_nvim() {
 zle -N _fzf_grep_nvim
 bindkey '^[t' _fzf_grep_nvim
 
+
+
 eval "$(navi widget zsh)"
 
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+eval "$(uv generate-shell-completion zsh)"
 
 alias taalomi='dj school_portal'
 export PATH="$HOME/bin:$PATH"
+
+
+djd() {
+    local cmd
+    # قائمة الأوامر التي تريدها
+    cmd=$(echo "runserver\nmakemigrations\nmigrate\nshell\ndbshell\ncollectstatic\ncreatesuperuser" | fzf --height 40% --reverse --header "Select Django Command")
+    
+    if [ -n "$cmd" ]; then
+        # تنفيذ الأمر باستخدام uv
+        uv run manage.py $cmd
+    fi
+}
+
+
+
+
 
 fastfetch
