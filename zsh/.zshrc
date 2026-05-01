@@ -1,7 +1,7 @@
 # Zaid Ajo's ZSH CONFIG
 
 [[ -o interactive ]] || return
-
+fpath=(/usr/share/zsh/site-functions $fpath)
 # تسريع تشغيل التحميل
 autoload -Uz compinit && compinit -u
 
@@ -15,7 +15,7 @@ export EDITOR='nvim'
 alias snvim="sudoedit"
 export VISUAL='nvim'
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
-
+export TERMINAL="wezterm"
 
 # 3. الإضافات والثيم (Oh My Zsh & Starship)
 export ZSH="$HOME/.oh-my-zsh"
@@ -44,9 +44,13 @@ export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git
 
 # --- Catppuccin Mocha for FZF ---
 export FZF_DEFAULT_OPTS=" \
+--layout=reverse --height=70% --border='rounded' --margin=1,2 --padding=1 \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=border:#585b70,label:#fab387 \
+--border-label='  Search ' --border-label-pos=2 \
+--prompt='  ' --pointer=' ' --marker=' ' "
 #
 # export FZF_DEFAULT_OPTS="--height 60% --layout=reverse --border --margin=1 --padding=1 \
 # --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
@@ -359,7 +363,11 @@ djd() {
 }
 
 
+if command -v tmux >/dev/null 2>&1 && [ -z "$TMUX" ]; then
+  tmux attach -t main || tmux new -s main
+fi
 
+setxkbmap -option ctrl:nocaps
 
 
 fastfetch
