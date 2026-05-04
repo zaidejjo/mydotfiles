@@ -86,6 +86,7 @@ mpc
 mpd
 mpv
 mtools
+mugshot
 nano
 nautilus
 navi
@@ -144,6 +145,7 @@ swaync
 telegram-desktop
 television
 tesseract-data-eng
+tgpt
 thefuck
 thunar
 thunar-archive-plugin

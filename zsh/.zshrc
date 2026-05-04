@@ -98,7 +98,6 @@ alias jl='jupyter-lab'
 alias fref='nvim $(rg --line-number --column --no-heading --color=always --smart-case . | fzf --ansi --delimiter : --preview "bat --color=always --highlight-line {2} {1}" | cut -d: -f1,2 | sed "s/:/ +/")'
 alias fcp='fzf --preview "bat --color=always {}" | xclip -selection clipboard'
 
-
 # --- UV & Python Optimized ---
 alias pip='uv pip'
 alias venv='uv venv'
@@ -363,11 +362,15 @@ djd() {
 }
 
 
-if command -v tmux >/dev/null 2>&1 && [ -z "$TMUX" ]; then
-  tmux attach -t main || tmux new -s main
+# فحص إذا كان التيرمينال هو Warp لمنع تشغيل tmux فيه
+if [[ "$TERM_PROGRAM" != "WarpTerminal" ]]; then
+  if command -v tmux >/dev/null 2>&1 && [ -z "$TMUX" ]; then
+    tmux attach -t main || tmux new -s main
+  fi
 fi
-
 setxkbmap -option ctrl:nocaps
 
 
 fastfetch
+
+alias ask='tgpt'
