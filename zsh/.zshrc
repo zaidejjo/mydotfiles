@@ -105,8 +105,9 @@ alias py='uv run python'
 alias uinst='uv add'
 alias urm='uv remove'
 alias dj='uv run manage.py'
-alias drun='uv run manage.py runserver'
+alias drun='uv run manage.py runserver 0.0.0.0:8000'
 alias dmm='uv run manage.py makemigrations'
+alias dms='uv run manage.py migrate_schemas'
 alias dmig='uv run manage.py migrate'
 alias dsh='uv run manage.py shell'
 alias dbsh='uv run manage.py dbshell'
@@ -146,10 +147,9 @@ compdef _django_custom_completion dj
 crun () { g++ -std=c++17 "$1" -o "${1%.cpp}" && "./${1%.cpp}"; }
 
 alias ytdl='yt-dlp -f "bestvideo+bestaudio/best" --merge-output-format mp4'
-alias yt-mp3='yt-dlp -x --audio-format mp3 --audio-quality 0'
-alias yt-playlist='yt-dlp -i -x --audio-format mp3 --yes-playlist'
 alias yt-up='sudo yt-dlp -U'
-
+alias yt-playlist='yt-dlp -i -x --audio-format mp3 --yes-playlist'
+alias ytmp3='yt-dlp -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -249,7 +249,9 @@ killport() {
     sudo kill -9 $(echo $pids)
     echo "Done"
 }
-
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
 
 histsize=10000
 savehist=10000
