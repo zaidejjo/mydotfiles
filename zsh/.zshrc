@@ -113,6 +113,7 @@ alias dsh='uv run manage.py shell'
 alias dbsh='uv run manage.py dbshell'
 alias dsu='uv run manage.py createsuperuser'
 alias dcolstc='uv run manage.py collectstatic'
+alias dcheck='uv run manage.py check'
 # --- البرمجة (Python, Django, C++) ---
 
 alias runserver='python manage.py runserver'
