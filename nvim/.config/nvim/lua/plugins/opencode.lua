@@ -34,33 +34,43 @@ return {
 
     vim.o.autoread = true -- Required for `opts.events.reload`
 
-    -- Recommended/example keymaps
-    vim.keymap.set({ "n", "x" }, "<C-a>", function()
+    -- الاختصارات الجديدة البديلة لـ Ctrl --
+
+    -- بديل <C-a> (Ask opencode) -> Leader + a
+    vim.keymap.set({ "n", "x" }, "<leader>oa", function()
       require("opencode").ask("@this: ", { submit = true })
     end, { desc = "Ask opencode…" })
-    vim.keymap.set({ "n", "x" }, "<C-x>", function()
+
+    -- بديل <C-x> (Execute action) -> Leader + x
+    vim.keymap.set({ "n", "x" }, "<leader>ox", function()
       require("opencode").select()
     end, { desc = "Execute opencode action…" })
+
+    -- فتح وإغلاق الإضافة -> Leader + oo
     vim.keymap.set({ "n", "t" }, "<leader>oo", function()
       require("opencode").toggle()
-    end)
+    end, { desc = "Toggle opencode" })
 
+    -- اختصارات الـ Operator (بقيت كما هي لأنها لا تستخدم Ctrl)
     vim.keymap.set({ "n", "x" }, "go", function()
       return require("opencode").operator("@this ")
     end, { desc = "Add range to opencode", expr = true })
+
     vim.keymap.set("n", "goo", function()
       return require("opencode").operator("@this ") .. "_"
     end, { desc = "Add line to opencode", expr = true })
 
-    vim.keymap.set("n", "<S-C-u>", function()
+    -- بديل اختصارات السكرول (الرفع والتنزيل) اللي كانت تستخدم Shift+Ctrl
+    -- السكرول لأعلى -> Leader + [
+    vim.keymap.set("n", "<leader>o[", function()
       require("opencode").command("session.half.page.up")
     end, { desc = "Scroll opencode up" })
-    vim.keymap.set("n", "<S-C-d>", function()
+
+    -- السكرول لأسفل -> Leader + ]
+    vim.keymap.set("n", "<leader>o]", function()
       require("opencode").command("session.half.page.down")
     end, { desc = "Scroll opencode down" })
 
-    -- You may want these if you use the opinionated `<C-a>` and `<C-x>` keymaps above — otherwise consider `<leader>o…` (and remove terminal mode from the `toggle` keymap)
-    vim.keymap.set("n", "+", "<C-a>", { desc = "Increment under cursor", noremap = true })
-    vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement under cursor", noremap = true })
+    -- ملاحظة: تم حذف إعدادات الـ + والـ - لأن زر الـ Ctrl عندك لا يعمل أصلاً
   end,
 }

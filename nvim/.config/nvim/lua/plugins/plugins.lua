@@ -1,15 +1,12 @@
 return {
-  -- البحث السريع
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.5",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
 
-  -- تلوين الكود المتقدم
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-  -- شريط الحالة
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -18,7 +15,6 @@ return {
     end,
   },
 
-  -- إكمال الأقواس تلقائياً
   {
     "windwp/nvim-autopairs",
     config = function()
@@ -27,7 +23,7 @@ return {
   },
   {
     "ThePrimeagen/harpoon",
-    branch = "harpoon2", -- النسخة الأحدث والمستقرة
+    branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local harpoon = require("harpoon")

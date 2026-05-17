@@ -13,7 +13,6 @@ return {
  ╚══════╝╚═╝  ╚═╝╚═╝╚═════╝     ╚═╝  ╚═╝ ╚════╝  ╚═════╝ ]],
         },
         sections = {
-          -- hl = "String" سيعطي الشعار لوناً أخضر/زيتي مريح جداً في Mocha
           { section = "header", padding = 2, hl = "String" },
           { section = "keys", gap = 1, padding = 1 },
           { section = "startup" },
@@ -22,11 +21,9 @@ return {
     },
   },
 
-  -- تعطيل الإضافات القديمة
   { "goolord/alpha-nvim", enabled = false },
   { "nvimdev/dashboard-nvim", enabled = false },
 
-  -- إعداد ثيم Catppuccin Mocha
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -44,7 +41,6 @@ return {
     },
   },
 
-  -- تفعيل الثيم كافتراضي
   {
     "LazyVim/LazyVim",
     opts = {
