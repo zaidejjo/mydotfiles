@@ -1,13 +1,10 @@
 return {
   "folke/persistence.nvim",
-  event = "BufReadPre", -- يتم تفعيله بمجرد فتح أي ملف
+  event = "BufReadPre",
   opts = {
-    -- خيارات إضافية إذا أردت تخصيص المسار
-    -- dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"),
     options = { "buffers", "curdir", "tabpages", "winsize" }, -- الأشياء التي سيحفظها
   },
   keys = {
-    -- استعادة جلسة المجلد الحالي (المشروع اللي أنت فيه)
     {
       "<leader>qs",
       function()
@@ -16,7 +13,6 @@ return {
       desc = "Restore Session",
     },
 
-    -- اختيار جلسة من الجلسات السابقة (قائمة)
     {
       "<leader>qS",
       function()
@@ -25,7 +21,6 @@ return {
       desc = "Select Session",
     },
 
-    -- استعادة آخر جلسة كنت فاتحها قبل إغلاق Neovim
     {
       "<leader>ql",
       function()
@@ -34,7 +29,6 @@ return {
       desc = "Restore Last Session",
     },
 
-    -- إيقاف الحفظ التلقائي (لو كنت تفتح ملفات مؤقتة ولا تريد حفظها)
     {
       "<leader>qd",
       function()

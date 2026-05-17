@@ -1,11 +1,11 @@
 # Zaid Ajo's ZSH CONFIG
 
+
 [[ -o interactive ]] || return
 fpath=(/usr/share/zsh/site-functions $fpath)
-# تسريع تشغيل التحميل
+fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -u
-
-# 2. المسارات (Paths) - مجمعة في مكان واحد
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 export PATH="$HOME/.local/bin:/opt/cmake/bin:$HOME/.npm-global/bin:$PATH"
 if [ -d "/home/linuxbrew/.linuxbrew" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -17,7 +17,6 @@ export VISUAL='nvim'
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 export TERMINAL="wezterm"
 
-# 3. الإضافات والثيم (Oh My Zsh & Starship)
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="af-magic" # سيعلوه Starship لاحقاً
 ZSH_DISABLE_COMPFIX=true
@@ -72,6 +71,7 @@ bindkey '^Z' undo                      # Ctrl+Z = Undo للسطر الحالي
 # --- النظام ---
 alias ؤمس='clear'
 alias cls='clear'
+alias cl='clear'
 alias ؤي='cd'
 alias ..='cd ..'
 alias .3='cd ../..'
@@ -144,14 +144,14 @@ zstyle ':completion:*:*:dj:*' menu yes select
 
 # 4. ربط الوظيفة
 compdef _django_custom_completion dj
-
 crun () { g++ -std=c++17 "$1" -o "${1%.cpp}" && "./${1%.cpp}"; }
 
 alias ytdl='yt-dlp -f "bestvideo+bestaudio/best" --merge-output-format mp4'
 alias yt-up='sudo yt-dlp -U'
 alias yt-playlist='yt-dlp -i -x --audio-format mp3 --yes-playlist'
 alias ytmp3='yt-dlp -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
-
+alias vpn-on="sudo openvpn --config /home/zaid/nl-free-104.protonvpn.udp.ovpn --daemon"
+alias vpn-off="sudo killall openvpn"
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	command yazi "$@" --cwd-file="$tmp"
@@ -160,7 +160,101 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
+fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
+# cx() { cd "$@" && ll; }
+cx() {
+    local show_hidden=0
+    local target_dir="."
 
+    # قراءة الخيارات الممررة للدالة
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -a) show_hidden=1; shift ;;
+            -*) shift ;; # تجاهل الخيارات الأخرى مثل l أو h لأن الجدول منسق تلقائياً
+            *) target_dir="$1"; shift ;;
+        esac
+    done
+
+    # الانتقال للمجلد إذا تم تحديده
+    if [ -d "$target_dir" ]; then
+        local original_dir="$PWD"
+        cd "$target_dir" || return
+    fi
+
+    # رأس الجدول (Header)
+    echo -e "\e[1;36m┌─────┬────────────────────────────────┬──────────┬──────────────────┐\e[0m"
+    echo -e "\e[1;36m│ \e[1;33m#   \e[1;36m│ \e[1;33mName                           \e[1;36m│ \e[1;33mType     \e[1;36m│ \e[1;33mModified         \e[1;36m│\e[0m"
+    echo -e "\e[1;36m├─────┼────────────────────────────────┼──────────┼──────────────────┤\e[0m"
+
+    local i=1
+
+    # جلب المجلدات أولاً ثم الملفات بناءً على خيار إظهار المخفي
+    if [ "$show_hidden" -eq 1 ]; then
+        (
+            find . -maxdepth 1 -mindepth 1 -type d ! -name '.' ! -name '..' | sort
+            find . -maxdepth 1 -mindepth 1 -type f | sort
+        )
+    else
+        (
+            find . -maxdepth 1 -mindepth 1 -type d ! -name '.*' | sort
+            find . -maxdepth 1 -mindepth 1 -type f ! -name '.*' | sort
+        )
+    fi |
+    while read -r entry; do
+        
+        # استخراج الاسم فقط بدون المسار ./
+        local name="${entry#./}"
+        [ -z "$name" ] && continue
+
+        # جلب وقت التعديل الفعلي بشكل موحد
+        local mod_time=""
+        if [ -d "$name" ] || [ -f "$name" ]; then
+            mod_time=$(date -r "$name" "+%d %b %H:%M" 2>/dev/null)
+            [ -z "$mod_time" ] && mod_time=$(stat -c '%y' "$name" 2>/dev/null | cut -c1-16)
+        fi
+        [ -z "$mod_time" ] && mod_time="---"
+
+        # تحديد النوع واللون
+        local type_str="File"
+        local is_dir=0
+        if [ -d "$name" ]; then
+            type_str="Dir"
+            is_dir=1
+        fi
+
+        # تمرير البيانات لـ awk للطباعة المنسقة
+        awk -v idx="$i" -v name="$name" -v is_dir="$is_dir" -v type="$type_str" -v mtime="$mod_time" '
+        BEGIN {
+            color = (is_dir == 1) ? "\033[1;34m" : "\033[0;32m";
+            reset = "\033[0m";
+            cyan  = "\033[1;36m";
+            printf "%s│%s %-3s %s│%s %s%-30s%s %s│%s %-8s %s│%s %-16s %s│%s\n", \
+                   cyan, reset, idx, cyan, reset, color, name, reset, cyan, reset, type, cyan, reset, mtime, cyan, reset
+        }'
+        
+        i=$((i+1))
+    done
+
+    # نهاية الجدول (Footer)
+    echo -e "\e[1;36m└─────┴────────────────────────────────┴──────────┴──────────────────┘\e[0m"
+
+    # الرجوع للمجلد الأصلي إذا كنا قد غيرناه لعرض المحتويات فقط
+    if [ -n "$original_dir" ]; then
+        cd "$original_dir" || return
+    fi
+}
+ce() {
+    # الانتقال للمجلد إذا تم تمريره كـ Argument
+    [ -n "$1" ] && cd "$1"
+
+    echo -e "\e[1;36m┌──────────────────────────────────────────────────────────┐\e[0m"
+    echo -e "\e[1;36m│\e[1;33m   Contents of: \e[1;35m$PWD \e[1;36m\e[0m"
+    echo -e "\e[1;36m└──────────────────────────────────────────────────────────┘\e[0m"
+
+    # استخدام eza لعرض جدول احترافي ملون بالأيقونات وتفاصيل الـ Git
+    eza --long --grid --icons --color=always --group-directories-first --git --time-style=relative
+}
 frg() {
   local rg_prefix="rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/'"
   local initial_query="${*:-}"
@@ -291,7 +385,7 @@ act() {
 }
 
 bindkey '^[e' edit-command-line
-
+bindkey '^e' autosuggest-accept  # اضغط Ctrl + E لقبول الاقتراح الرمادي فوراً
 
 
 export FZF_CTRL_T_OPTS="
@@ -377,3 +471,11 @@ setxkbmap -option ctrl:nocaps
 fastfetch
 
 alias ask='tgpt'
+
+# pnpm
+export PNPM_HOME="/home/zaid/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
