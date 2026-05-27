@@ -10,6 +10,11 @@ export PATH="$HOME/.local/bin:/opt/cmake/bin:$HOME/.npm-global/bin:$PATH"
 if [ -d "/home/linuxbrew/.linuxbrew" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
+[ -f ~/.pypi_secrets ] && source ~/.pypi_secrets
+
+[ -f ~/.secrets ] && source ~/.secrets
+
+
 
 export EDITOR='nvim'
 alias snvim="sudoedit"
@@ -97,6 +102,7 @@ alias cat='bat --paging=never'
 alias jl='jupyter-lab'
 alias fref='nvim $(rg --line-number --column --no-heading --color=always --smart-case . | fzf --ansi --delimiter : --preview "bat --color=always --highlight-line {2} {1}" | cut -d: -f1,2 | sed "s/:/ +/")'
 alias fcp='fzf --preview "bat --color=always {}" | xclip -selection clipboard'
+alias lg='lazygit'
 
 # --- UV & Python Optimized ---
 alias pip='uv pip'
@@ -459,10 +465,10 @@ djd() {
 }
 
 
-# فحص إذا كان التيرمينال هو Warp لمنع تشغيل tmux فيه
-if [[ "$TERM_PROGRAM" != "WarpTerminal" ]]; then
-  if command -v tmux >/dev/null 2>&1 && [ -z "$TMUX" ]; then
-    tmux attach -t main || tmux new -s main
+if [[ $- == *i* ]] && [ -z "$TMUX" ]; then
+  if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+    command -v tmux >/dev/null 2>&1 && \
+      (tmux attach -t main || tmux new -s main)
   fi
 fi
 setxkbmap -option ctrl:nocaps

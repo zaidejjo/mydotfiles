@@ -64,7 +64,7 @@ config.window_background_opacity = 0.85
 config.macos_window_background_blur = 20 -- لمستخدمي الماك
 config.win32_system_backdrop = "Acrylic" -- لمستخدمي ويندوز (يعطي تأثير زجاجي)
 
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
 config.window_padding = {
 	left = 15,
 	right = 15,
