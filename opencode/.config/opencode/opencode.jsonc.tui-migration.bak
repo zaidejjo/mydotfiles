@@ -1,0 +1,112 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "agent": {
+    "architect": {
+      "description": "Designs scalable software architecture and project structures",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "prompt": "You are a senior software architect focused on clean architecture, SOLID principles, scalability, maintainability, and clear implementation planning. Do not write implementation code unless explicitly requested.",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask",
+        "read": "allow",
+        "grep": "allow",
+        "glob": "allow",
+        "list": "allow",
+      },
+    },
+
+    "coder": {
+      "description": "Writes production-ready code and implements features",
+      "mode": "primary",
+      "temperature": 0.2,
+      "prompt": "Write clean, production-ready code.\n\nBefore making changes:\n- Use fd to understand project structure.\n- Use rg to search for existing implementations.\n- Reuse existing patterns whenever possible.\n- Read related files before editing.\n\nWhile implementing:\n- Avoid placeholders and TODOs.\n- Keep code maintainable and consistent.\n- Follow existing architecture.\n\nAfter implementation:\n- Review for bugs.\n- Review edge cases.\n- Review performance concerns.\n- Review security concerns.\n\nDo not stop after the first implementation.\n\nCRITICAL: As your absolute last action when a task is fully completed or fixed, you MUST execute a bash command using 'notify-send' to alert the user that you are done.",
+      "permission": {
+        "edit": "ask",
+        "bash": "allow",
+        "read": "allow",
+        "grep": "allow",
+        "glob": "allow",
+        "list": "allow",
+      },
+    },
+
+    "reviewer": {
+      "description": "Reviews code quality, architecture, security, and maintainability",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "prompt": "Review code like a senior staff engineer. Find bugs, edge cases, security issues, performance problems, code smells, architectural weaknesses, and maintainability concerns. Suggest concrete improvements and prioritize findings by severity.",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask",
+        "read": "allow",
+        "grep": "allow",
+        "glob": "allow",
+        "list": "allow",
+      },
+    },
+
+    "bug-hunter": {
+      "description": "Debugs projects, fixes issues, and improves reliability",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "prompt": "Investigate bugs systematically.\n\nUse logs, stack traces, test failures, and code analysis.\n\nIdentify:\n- root cause\n- hidden side effects\n- edge cases\n- regression risks\n\nFix the underlying problem rather than symptoms.",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "grep": "allow",
+        "glob": "allow",
+        "list": "allow",
+      },
+    },
+
+    "documenter": {
+      "description": "Writes technical documentation and README files",
+      "mode": "subagent",
+      "temperature": 0.3,
+      "prompt": "Generate concise, professional, and accurate documentation, setup instructions, API references, architecture summaries, and developer guides.",
+      "permission": {
+        "edit": "allow",
+        "bash": "deny",
+        "read": "allow",
+        "grep": "allow",
+        "glob": "allow",
+        "list": "allow",
+      },
+    },
+
+    "analyzer": {
+      "description": "Analyzes large codebases and explains architecture",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "prompt": "Analyze codebases, explain architecture, identify dependencies, data flow, bottlenecks, and potential risks without modifying files.",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "read": "allow",
+        "grep": "allow",
+        "glob": "allow",
+        "list": "allow",
+      },
+    },
+  },
+
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+    },
+  },
+  "lsp": true,
+  "keybinds": {
+    "leader": "alt+space",
+    "bindings": {
+      "accept_all_changes": "alt+a",
+      "reject_all_changes": "alt+r",
+      "toggle_agent_chat": "alt+t",
+      "stop_current_task": "ctrl+c",
+    },
+  },
+}

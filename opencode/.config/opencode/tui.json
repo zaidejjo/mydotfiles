@@ -1,0 +1,12 @@
+{
+  "$schema": "https://opencode.ai/tui.json",
+  "keybinds": {
+    "leader": "alt+space",
+    "bindings": {
+      "accept_all_changes": "alt+a",
+      "reject_all_changes": "alt+r",
+      "toggle_agent_chat": "alt+t",
+      "stop_current_task": "ctrl+c"
+    }
+  }
+}

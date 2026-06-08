@@ -23,7 +23,6 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 export TERMINAL="wezterm"
 
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="af-magic" # سيعلوه Starship لاحقاً
 ZSH_DISABLE_COMPFIX=true
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting history-substring-search sudo fzf-tab archlinux uv)
 source $ZSH/oh-my-zsh.sh
@@ -485,3 +484,17 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+alias gcm='git switch main'
+alias gcd='git switch dev'
+alias gw='git switch'
+alias gcrag='git switch feature/faiss-rag'
+
+
+export ANDROID_HOME=/opt/android-sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin
+export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+export PATH="$PATH:$ANDROID_HOME/tools/bin"
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
