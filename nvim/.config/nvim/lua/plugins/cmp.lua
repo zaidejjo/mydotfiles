@@ -18,8 +18,24 @@ return {
       },
 
       mapping = cmp.mapping.preset.insert({
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        ["<Tab>"] = cmp.mapping.select_next_item(),
+        -- 🔥 التغيير الرئيسي: Tab أصبح زر القبول
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.confirm({ select = true }) -- يقبل أول اقتراح
+          else
+            fallback() -- يعمل كـ Tab عادي إذا لم تكن هناك تكملة
+          end
+        end, { "i", "s" }),
+
+        -- 🔥 تغيير Enter: لم يعد يقبل التكملة، بل يدخل سطر جديد فقط
+        ["<CR>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.abort() -- يلغي التكملة إذا كانت ظاهرة
+          end
+          fallback() -- ثم يدخل سطر جديد
+        end, { "i" }),
+
+        -- Shift+Tab للتنقل للخلف في قائمة الاقتراحات
         ["<S-Tab>"] = cmp.mapping.select_prev_item(),
 
         -- الحل السحري: إذا ضغطت سهم لأسفل والقائمة مفتوحة، سيغلقها وينزل سطر لأسفل فوراً دون إزعاج
