@@ -21,6 +21,9 @@ rad.json
 #Test results file
 TestResults.xml
 
+# Backup files from install.sh
+*.bak.*
+
 # Node dependencies
 **/node_modules/
 node_modules/
