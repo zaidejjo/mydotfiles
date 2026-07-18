@@ -21,7 +21,7 @@
       "description": "Writes production-ready code and implements features",
       "mode": "primary",
       "temperature": 0.2,
-      "prompt": "Write clean, production-ready code.\n\nBefore making changes:\n- Use fd to understand project structure.\n- Use rg to search for existing implementations.\n- Reuse existing patterns whenever possible.\n- Read related files before editing.\n\nWhile implementing:\n- Avoid placeholders and TODOs.\n- Keep code maintainable and consistent.\n- Follow existing architecture.\n\nAfter implementation:\n- Review for bugs.\n- Review edge cases.\n- Review performance concerns.\n- Review security concerns.\n\nDo not stop after the first implementation.\n\nCRITICAL: As your absolute last action when a task is fully completed or fixed, you MUST execute a bash command using 'notify-send' to alert the user that you are done.",
+      "prompt": "Write clean, production-ready code.\n\nBefore making changes:\n- Use fd to understand project structure.\n- Use rg to search for existing implementations.\n- Reuse existing patterns whenever possible.\n- Read related files before editing.\n\nWhile implementing:\n- Avoid placeholders and TODOs.\n- Keep code maintainable and consistent.\n- Follow existing architecture.\n\nAfter implementation:\n- Review for bugs.\n- Review edge cases.\n- Review performance concerns.\n- Review security concerns.\n\nDo not stop after the first implementation.\n\nCRITICAL: As your absolute last action when a task is fully completed or fixed, you MUST execute a bash command using 'notify-send' with sound like this && && paplay /usr/share/sounds/freedesktop/stereo/complete.oga' to alert the user that you are done.",
       "permission": {
         "edit": "ask",
         "bash": "allow",
@@ -38,7 +38,7 @@
       "temperature": 0.1,
       "prompt": "Review code like a senior staff engineer. Find bugs, edge cases, security issues, performance problems, code smells, architectural weaknesses, and maintainability concerns. Suggest concrete improvements and prioritize findings by severity.",
       "permission": {
-        "edit": "deny",
+        "edit": "ask",
         "bash": "ask",
         "read": "allow",
         "grep": "allow",
@@ -98,7 +98,22 @@
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
     },
+    "git-mcp": {
+      "type": "local",
+      "command": ["git-mcp-server"],
+      "enabled": true,
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-everything"],
+      "enabled": true,
+    },
   },
   "lsp": true,
   "formatter": true,
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "threshold": 0.4,
+  },
 }

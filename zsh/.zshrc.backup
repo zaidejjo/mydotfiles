@@ -109,7 +109,6 @@ alias ins='sudo pacman -S'
 alias rm='trash-put'
 alias reload='source ~/.zshrc'
 alias v='nvim'
-alias nano='nvim'
 alias vf='fzf | xargs -r nvim'
 alias nsch='nvim $(fzf --preview="bat --color=always {}")'
 alias zsch='zed $(fzf --preview="bat --color=always {}")'
@@ -152,16 +151,9 @@ alias spsql='sudo systemctl start postgresql'
 # Docs
 alias mergeall='mkdir -p temp_pdf && libreoffice --headless --convert-to pdf *.* --outdir temp_pdf && gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=Merged_Files_$(date +%Y%m%d_%H%M%S).pdf temp_pdf/*.pdf && rm -rf temp_pdf'
 
-# Nuxt and Bun dev
-alias bd='bun run dev'
-alias bbuild='bun run build'
-alias build-desktop="TAURI_BUILD=true bun --cwd frontend run generate && bun --cwd desktop run tauri build"
 
 
-# Music & mpv
-alias mpvfl='mpv --loop-file=yes'
-alias mpvpl='mpv --loop-playlist=inf'
-
+# 2. وظيفة الإكمال
 _django_custom_completion() {
     local -a commands
     commands=(
@@ -570,14 +562,3 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 alias bnmodule='bunx nuxi@latest module add'
 alias pnmodule='pnx nuxi@latest module add'
-
-export PATH=/home/zaid/bin:$PATH
-
-[[ -e "/home/zaid/lib/oracle-cli/lib/python3.14/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/zaid/lib/oracle-cli/lib/python3.14/site-packages/oci_cli/bin/oci_autocomplete.sh"
-export PATH_NPM="$(npm config get prefix)/bin"
-export PATH="$PATH:$PATH_NPM"
-export PATH="$PATH:$HOME/flutter/bin"  # ✅ PATH كبير، HOME كبير
-export ANDROID_HOME=$HOME/Android/Sdk  # ✅ ANDROID_HOME كبير
-export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
-export PATH="$PATH:$ANDROID_HOME/platform-tools"
-export CHROME_EXECUTABLE=/usr/bin/brave
