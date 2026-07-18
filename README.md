@@ -1,12 +1,12 @@
-# zaid/dotfiles
+# mydotfiles
 
 Arch Linux dotfiles with interactive TUI installer. Manages packages (pacman + AUR) and deploys configs with timestamped backups.
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/zaid/mydotfiles.git ~/dotfiles
-cd ~/dotfiles
+git clone https://github.com/zaidejjo/mydotfiles.git
+cd mydotfiles
 ./install.sh
 ```
 
