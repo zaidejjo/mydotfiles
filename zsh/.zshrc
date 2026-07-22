@@ -157,7 +157,7 @@ alias bd='bun run dev'
 alias bbuild='bun run build'
 alias build-desktop="TAURI_BUILD=true bun --cwd frontend run generate && bun --cwd desktop run tauri build"
 
-
+alias wifi='wlctl'
 # Music & mpv
 alias mpvfl='mpv --loop-file=yes'
 alias mpvpl='mpv --loop-playlist=inf'
@@ -494,18 +494,17 @@ djd() {
     fi
 }
 
-
-if [[ $- == *i* ]] && [ -z "$TMUX" ]; then
+if [[ $- == *i* ]] && [ -z "$ZELLIJ" ]; then
   if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
-    command -v tmux >/dev/null 2>&1 && \
-      (tmux attach -t main || tmux new -s main)
+    command -v zellij >/dev/null 2>&1 && \
+      (zellij attach main || zellij -s main)
   fi
 fi
 setxkbmap -option ctrl:nocaps
 
 
 fastfetch
-
+DISABLE_AUTO_TITLE="false"
 alias ask='tgpt'
 
 # pnpm
