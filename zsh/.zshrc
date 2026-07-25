@@ -2,6 +2,8 @@
 # zmodload zsh/zprof
 
 eval "$(starship init zsh)"
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # --- Zinit Bootstrapping ---
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -26,10 +28,6 @@ zinit wait lucid light-mode for \
     zdharma-continuum/fast-syntax-highlighting \
     zsh-users/zsh-history-substring-search
 
-
-# zsh-users/zsh-syntax-highlighting \
-
-
 # --- 4. snippets من OMZ ---
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
@@ -46,7 +44,7 @@ zstyle ':fzf-tab:complete:*' fzf-flags --color=fg:15,bg:-1,hl:6 --style=full
 zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons $extract_colors'
 
-# --- الملفات السرية والبيئة ---
+# --- Secrets ---
 [ -f ~/.pypi_secrets ] && source ~/.pypi_secrets
 [ -f ~/.secrets ] && source ~/.secrets
 
@@ -55,8 +53,6 @@ alias snvim="sudoedit"
 export VISUAL='nvim'
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 export TERMINAL="wezterm"
-
-# (كمل باقي الملف عادي من هون...)
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585b70"
@@ -94,13 +90,10 @@ export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always --icons {} | head -2
 bindkey '^H' backward-kill-word
 bindkey '^[^[[3;5~' kill-word
 bindkey '^Z' undo
-# إصلاح حركة الأسهم مع Ctrl للتنقل بين الكلمات داخل Zellij / Tmux / WezTerm
 bindkey "^[[1;5C" forward-word      # Ctrl + Right Arrow
 bindkey "^[[1;5D" backward-word     # Ctrl + Left Arrow
 bindkey "^[b" backward-word         # Alt + Left Arrow
 bindkey "^[f" forward-word          # Alt + Right Arrow
-
-# إعدادات إضافية للتوافق مع بعض أنماط المحاكيات
 bindkey "^[OD" backward-word
 bindkey "^[OC" forward-word
 bindkey "5D" backward-word
@@ -122,9 +115,7 @@ alias vf='fzf | xargs -r nvim'
 alias nsch='nvim $(fzf --preview="bat --color=always {}")'
 alias copy='xsel --input --clipboard'
 alias paste='xsel --output --clipboard'
-
 alias ls='eza --icons --color=always --group-directories-first'
-alias ll='eza -alh --icons --color=always --group-directories-first --git'
 alias la='eza -a --icons --color=always'
 alias tree='eza -T'
 alias cat='bat --paging=never'
@@ -134,9 +125,6 @@ alias jl='jupyter-lab'
 alias lg='lazygit'
 
 # --- UV & Python Optimized ---
-alias pip='uv pip'
-alias venv='uv venv'
-alias py='uv run python'
 alias dj='uv run manage.py'
 alias drun='uv run manage.py runserver 0.0.0.0:8000'
 alias dmm='uv run manage.py makemigrations'
@@ -147,10 +135,18 @@ alias dbsh='uv run manage.py dbshell'
 alias dcolstc='uv run manage.py collectstatic'
 alias dcheck='uv run manage.py check'
 alias runserver='python manage.py runserver'
-alias spsql='sudo systemctl start postgresql'
+
+# git
+alias gcm='git switch main'
+alias gcd='git switch dev'
+alias gw='git switch'
+alias gcrag='git switch feature/faiss-rag'
 
 
+# Wifi
 alias wifi='wlctl'
+
+# Media
 alias mpvfl='mpv --loop-file=yes'
 alias mpvpl='mpv --loop-playlist=inf'
 
@@ -181,79 +177,6 @@ function y() {
 }
 
 fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
-
-# cx() {
-#     local show_hidden=0
-#     local target_dir="."
-#
-#     while [[ $# -gt 0 ]]; do
-#         case "$1" in
-#             -a) show_hidden=1; shift ;;
-#             -*) shift ;;
-#             *) target_dir="$1"; shift ;;
-#         esac
-#     done
-#
-#     if [ -d "$target_dir" ]; then
-#         local original_dir="$PWD"
-#         cd "$target_dir" || return
-#     fi
-#
-#     echo -e "\e[1;36m┌─────┬────────────────────────────────┬──────────┬──────────────────┐\e[0m"
-#     echo -e "\e[1;36m│ \e[1;33m#   \e[1;36m│ \e[1;33mName                            \e[1;36m│ \e[1;33mType     \e[1;36m│ \e[1;33mModified          \e[1;36m│\e[0m"
-#     echo -e "\e[1;36m├─────┼────────────────────────────────┼──────────┼──────────────────┤\e[0m"
-#
-#     local i=1
-#
-#     if [ "$show_hidden" -eq 1 ]; then
-#         (
-#             find . -maxdepth 1 -mindepth 1 -type d ! -name '.' ! -name '..' | sort
-#             find . -maxdepth 1 -mindepth 1 -type f | sort
-#         )
-#     else
-#         (
-#             find . -maxdepth 1 -mindepth 1 -type d ! -name '.*' | sort
-#             find . -maxdepth 1 -mindepth 1 -type f ! -name '.*' | sort
-#         )
-#     fi |
-#     while read -r entry; do
-#         local name="${entry#./}"
-#         [ -z "$name" ] && continue
-#
-#         local mod_time=""
-#         if [ -d "$name" ] || [ -f "$name" ]; then
-#             mod_time=$(date -r "$name" "+%d %b %H:%M" 2>/dev/null)
-#             [ -z "$mod_time" ] && mod_time=$(stat -c '%y' "$name" 2>/dev/null | cut -c1-16)
-#         fi
-#         [ -z "$mod_time" ] && mod_time="---"
-#
-#         local type_str="File"
-#         local is_dir=0
-#         if [ -d "$name" ]; then
-#             type_str="Dir"
-#             is_dir=1
-#         fi
-#
-#         awk -v idx="$i" -v name="$name" -v is_dir="$is_dir" -v type="$type_str" -v mtime="$mod_time" '
-#         BEGIN {
-#             color = (is_dir == 1) ? "\033[1;34m" : "\033[0;32m";
-#             reset = "\033[0m";
-#             cyan  = "\033[1;36m";
-#             printf "%s│%s %-3s %s│%s %s%-30s%s %s│%s %-8s %s│%s %-16s %s│%s\n", \
-#                    cyan, reset, idx, cyan, reset, color, name, reset, cyan, reset, type, cyan, reset, mtime, cyan, reset
-#         }'
-#
-#         i=$((i+1))
-#     done
-#
-#     echo -e "\e[1;36m└─────┴────────────────────────────────┴──────────┴──────────────────┘\e[0m"
-#
-#     if [ -n "$original_dir" ]; then
-#         cd "$original_dir" || return
-#     fi
-# }
-
-
 frg() {
   local rg_prefix="rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/'"
   local initial_query="${*:-}"
@@ -266,40 +189,12 @@ frg() {
       --preview-window 'up,60%,border-bottom,+{2}+3/3' \
       --bind 'enter:become(nvim +{2} {1})'
 }
-
 fh() { history | fzf; }
-
 fhi() {
   local cmd
   cmd=$(history | fzf | sed 's/^[ ]*[0-9]\+[ ]*//') || return
   eval "$cmd"
 }
-
-fwi() {
-  local dev=$(nmcli -t -f device dev | grep '^wlp' | head -n1)
-  local target=$(nmcli --colors yes dev wifi list | sed 1d | fzf --ansi --header "Select WiFi Network")
-  if [ -n "$target" ]; then
-    local ssid=$(echo "$target" | awk '{print $2}')
-    nmcli dev wifi connect "$ssid" --ask
-  fi
-}
-
-calc() { echo "scale=2; $*" | bc -l; }
-
-# fif() {
-#   INITIAL_QUERY="${*:-}"
-#   RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case"
-#
-#   fzf --ansi --disabled --query "$INITIAL_QUERY" \
-#       --bind "start:reload:$RG_PREFIX {q}" \
-#       --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
-#       --delimiter : \
-#       --preview 'bat --color=always --style=numbers --highlight-line {2} {1}' \
-#       --preview-window 'up:60%:wrap' \
-#       --bind "enter:become(nvim {1} +{2})" \
-#       --header " ..." \
-#       --prompt "❯ "
-# }
 
 unalias zi 2>/dev/null
 zi() {
@@ -325,12 +220,19 @@ killport() {
     sudo kill -9 $(echo $pids)
     echo "Done"
 }
-
 mkcd() { mkdir -p "$1" && cd "$1"; }
 
-histsize=10000
-savehist=10000
-setopt share_history append_history inc_append_history hist_ignore_dups
+# ---  History ---
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
 
 [ -f ~/.thefuck_init.zsh ] && source ~/.thefuck_init.zsh
 
@@ -339,8 +241,7 @@ export BAT_THEME="Catppuccin Mocha"
 autoload -Uz edit-command-line
 zle -N edit-command-line
 
-unalias act 2>/dev/null
-actv() {
+vact() {
   local dir="$PWD"
   while [ "$dir" != "/" ]; do
     for venv in .venv venv env; do
@@ -420,22 +321,6 @@ setxkbmap -option ctrl:nocaps
 
 fastfetch
 
-
-# PNPM & PATHs
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
-esac
-
-alias gcm='git switch main'
-alias gcd='git switch dev'
-alias gw='git switch'
-alias gcrag='git switch feature/faiss-rag'
-
-alias odysseus="tmux new-session -d -s odysseus 'cd /home/zaid/odysseus && source venv/bin/activate && python -m uvicorn app:app --host 127.0.0.1 --port 7000'"
-alias odysseus-stop="tmux kill-session -t odysseus"
-
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin
 export PATH="$PATH:$ANDROID_HOME/tools/bin"
@@ -460,8 +345,6 @@ export OPENCODE_EXPERIMENTAL_CACHE_1H_TTL=1
 
 export PATH="$HOME/bin:$PATH"
 export PATH="/home/zaid/.local/bin:$PATH"
-
-alias apt='sudo nala'
 
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"

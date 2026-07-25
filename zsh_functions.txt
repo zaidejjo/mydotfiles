@@ -1,0 +1,87 @@
+# cx() {
+#     local show_hidden=0
+#     local target_dir="."
+#
+#     while [[ $# -gt 0 ]]; do
+#         case "$1" in
+#             -a) show_hidden=1; shift ;;
+#             -*) shift ;;
+#             *) target_dir="$1"; shift ;;
+#         esac
+#     done
+#
+#     if [ -d "$target_dir" ]; then
+#         local original_dir="$PWD"
+#         cd "$target_dir" || return
+#     fi
+#
+#     echo -e "\e[1;36m┌─────┬────────────────────────────────┬──────────┬──────────────────┐\e[0m"
+#     echo -e "\e[1;36m│ \e[1;33m#   \e[1;36m│ \e[1;33mName                            \e[1;36m│ \e[1;33mType     \e[1;36m│ \e[1;33mModified          \e[1;36m│\e[0m"
+#     echo -e "\e[1;36m├─────┼────────────────────────────────┼──────────┼──────────────────┤\e[0m"
+#
+#     local i=1
+#
+#     if [ "$show_hidden" -eq 1 ]; then
+#         (
+#             find . -maxdepth 1 -mindepth 1 -type d ! -name '.' ! -name '..' | sort
+#             find . -maxdepth 1 -mindepth 1 -type f | sort
+#         )
+#     else
+#         (
+#             find . -maxdepth 1 -mindepth 1 -type d ! -name '.*' | sort
+#             find . -maxdepth 1 -mindepth 1 -type f ! -name '.*' | sort
+#         )
+#     fi |
+#     while read -r entry; do
+#         local name="${entry#./}"
+#         [ -z "$name" ] && continue
+#
+#         local mod_time=""
+#         if [ -d "$name" ] || [ -f "$name" ]; then
+#             mod_time=$(date -r "$name" "+%d %b %H:%M" 2>/dev/null)
+#             [ -z "$mod_time" ] && mod_time=$(stat -c '%y' "$name" 2>/dev/null | cut -c1-16)
+#         fi
+#         [ -z "$mod_time" ] && mod_time="---"
+#
+#         local type_str="File"
+#         local is_dir=0
+#         if [ -d "$name" ]; then
+#             type_str="Dir"
+#             is_dir=1
+#         fi
+#
+#         awk -v idx="$i" -v name="$name" -v is_dir="$is_dir" -v type="$type_str" -v mtime="$mod_time" '
+#         BEGIN {
+#             color = (is_dir == 1) ? "\033[1;34m" : "\033[0;32m";
+#             reset = "\033[0m";
+#             cyan  = "\033[1;36m";
+#             printf "%s│%s %-3s %s│%s %s%-30s%s %s│%s %-8s %s│%s %-16s %s│%s\n", \
+#                    cyan, reset, idx, cyan, reset, color, name, reset, cyan, reset, type, cyan, reset, mtime, cyan, reset
+#         }'
+#
+#         i=$((i+1))
+#     done
+#
+#     echo -e "\e[1;36m└─────┴────────────────────────────────┴──────────┴──────────────────┘\e[0m"
+#
+#     if [ -n "$original_dir" ]; then
+#         cd "$original_dir" || return
+#     fi
+# }
+
+
+# fif() {
+#   INITIAL_QUERY="${*:-}"
+#   RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case"
+#
+#   fzf --ansi --disabled --query "$INITIAL_QUERY" \
+#       --bind "start:reload:$RG_PREFIX {q}" \
+#       --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+#       --delimiter : \
+#       --preview 'bat --color=always --style=numbers --highlight-line {2} {1}' \
+#       --preview-window 'up:60%:wrap' \
+#       --bind "enter:become(nvim {1} +{2})" \
+#       --header " ..." \
+#       --prompt "❯ "
+# }
+
