@@ -5,6 +5,12 @@
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Ctrl y" {
+          Run "yazi" {
+            floating true
+            close_on_exit true
+          }
+        }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -323,7 +329,7 @@ theme "catppuccin-macchiato"
 // Choose the base input mode of zellij.
 // Default: normal
 // 
-// default_mode "locked"
+default_mode "tmux"
  
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
@@ -339,6 +345,7 @@ theme "catppuccin-macchiato"
 // 
 // default_layout "compact"
 default_layout "clean_compact"
+// default_layout "default"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
