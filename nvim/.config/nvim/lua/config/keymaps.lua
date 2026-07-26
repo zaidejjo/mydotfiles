@@ -29,7 +29,16 @@ vim.keymap.set("n", "<C-t>", function()
   end
 end, { desc = "Search Text with Ripgrep (Ctrl+t)" })
 
+-- فتح Themery باستخدام Space + t + h
+vim.keymap.set("n", "<leader>th", "<cmd>Themery<cr>", { desc = "Theme Switcher" })
 
+-- تحريك الأسطر في الوضع العادي (Normal Mode)
+vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", { desc = "Move Down", silent = true })
+vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==", { desc = "Move Up", silent = true })
+
+-- تحريك الأسطر في وضع التحديد (Visual Mode)
+vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move Down", silent = true })
+vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move Up", silent = true })
 
 vim.keymap.set("n", "<C-S-f>", function()
   if LazyVim.pick.picker.name == "fzf" then
