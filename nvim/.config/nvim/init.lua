@@ -1,4 +1,4 @@
--- تعيين الخيارات العامة أولاً (قبل تحميل lazy لمنع خطأ الـ modifiable)
+vim.loader.enable()
 vim.opt.termguicolors = true
 vim.opt.termbidi = true
 
