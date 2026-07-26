@@ -10,16 +10,11 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d "$ZINIT_HOME" ] && mkdir -p "$(dirname $ZINIT_HOME)" && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# --- 1. تحميل compinit المدمج أولاً بشكل صريح ---
-autoload -Uz compinit
-compinit -C -d "${ZDOTDIR:-$HOME}/.zcompdump"
 
 # --- 2. تحميل إضافات Zinit مع الترتيب الصحيح لـ fzf-tab ---
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
-# zinit light trapd00r/LS_COLORS
-# ضروري جداً لتثبيت fzf-tab بدون أخطاء _setup
-zinit ice Aloxaf/fzf-tab
+# zinit ice Aloxaf/fzf-tab
 zinit light Aloxaf/fzf-tab
 
 # --- 3. باقي الإضافات بوضع Turbo السريع ---
@@ -33,16 +28,36 @@ zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
 zinit snippet OMZP::uv
+zinit snippet OMZP::command-not-found
+zinit snippet OMZP::bun
 
-# --- إعدادات completion ---
+autoload -Uz compinit
+compinit -C -d "${ZDOTDIR:-$HOME}/.zcompdump"
+
+zinit cdreplay -q
+
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*:*:dj:*' file-patterns ''
-zstyle ':completion:*:*:dj:*' menu yes select
-# --- تحسين ألوان وقوائم fzf-tab ---
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':fzf-tab:complete:*' fzf-flags --color=fg:15,bg:-1,hl:6 --style=full
+# zstyle ':completion:*:*:dj:*' fil-patterns ''
+zstyle ':completion:*' menu no
+
+# --- fzf-tab Configuration ---
+zstyle ':fzf-tab:*' fzf-flags \
+  --color=bg+:#313244,bg:#1e1e2e,spinner:#b4befe,hl:#cba6f7 \
+  --color=fg:#cdd6f4,header:#cba6f7,info:#89b4fa,pointer:#b4befe \
+  --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#cba6f7 \
+  --color=border:#b4befe,label:#cba6f7 \
+  --border=sharp \
+  --padding=1 \
+  --prompt='󰍉  ' \
+  --pointer='❯ '
+
 zstyle ':fzf-tab:*' switch-group ',' '.'
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons $extract_colors'
+
+# المعاينة في الأسفل بدلاً من اليمين لتصميم أروق
+zstyle ':fzf-tab:*' fzf-preview-window 'down:50%:wrap'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons=always $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always --icons=always $realpath'
 
 # --- Secrets ---
 [ -f ~/.pypi_secrets ] && source ~/.pypi_secrets
@@ -73,13 +88,17 @@ export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git
 
 export FZF_DEFAULT_OPTS=" \
 --ansi \
---layout=reverse --height=70% --border='rounded' --margin=1,2 --padding=1 \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
---color=border:#585b70,label:#fab387 \
---border-label='  Search ' --border-label-pos=2 \
---prompt='  ' --pointer=' ' --marker=' ' "
+--layout=reverse \
+--height=60% \
+--border='sharp' \
+--margin=1 \
+--padding=1 \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#b4befe,hl:#cba6f7 \
+--color=fg:#cdd6f4,header:#cba6f7,info:#89b4fa,pointer:#b4befe \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#cba6f7 \
+--color=border:#b4befe,label:#89b4fa \
+--border-label=' 󰍉 FIND ' --border-label-pos=2 \
+--prompt='❯ ' --pointer='❯ ' --marker='✔ ' "
 
 smart_preview="if [ -d {} ]; then eza --tree --color=always --icons {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
 show_file_or_dir_preview="if [ -d {} ]; then yazi --chooser-file=/dev/null {}; else bat -n --color=always --line-range :500 {}; fi"
@@ -142,6 +161,8 @@ alias gcd='git switch dev'
 alias gw='git switch'
 alias gcrag='git switch feature/faiss-rag'
 
+# NVChad
+alias nvchad="NVIM_APPNAME=nvchad nvim"
 
 # Wifi
 alias wifi='wlctl'
@@ -221,7 +242,36 @@ killport() {
     echo "Done"
 }
 mkcd() { mkdir -p "$1" && cd "$1"; }
+# --- Ultimate Nushell Directory View & Smart Navigation (cx) ---
+cx() {
+  # 1. دعم zoxide للقفز الذكي بين المجلدات
+  if [ -n "$1" ]; then
+    if [ -d "$1" ]; then
+      builtin cd "$1" || return
+    elif command -v zoxide >/dev/null 2>&1; then
+      local target_dir
+      target_dir="$(zoxide query "$1" 2>/dev/null)"
+      if [ -n "$target_dir" ] && [ -d "$target_dir" ]; then
+        builtin cd "$target_dir" || return
+      else
+        echo "Directory not found: $1"
+        return 1
+      fi
+    else
+      builtin cd "$1" || return
+    fi
+  fi
 
+  # 2. Nushell Table Generator مع الأيقونات والتصفيف الأنيق
+  nu -c "
+    ls 
+    | sort-by type name 
+    | insert icon {|row| if \$row.type == 'dir' { '' } else { '' }}
+    | update name {|row| $'(\$row.icon)(\$row.name)'}
+    | update size {|row| if \$row.type == 'dir' { '' } else { \$row.size }}
+    | reject icon
+  "
+}
 # ---  History ---
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000
