@@ -1,0 +1,94 @@
+2026-07-27T16:50:24.609251Z  INFO herdr::api::server: api server listening path=/home/zaid/.config/herdr/herdr.sock
+2026-07-27T16:50:24.610480Z  INFO herdr::app: using pane scrollback configuration pane_scrollback_limit_bytes=10000000
+2026-07-27T16:50:24.788865Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T16:50:24.792507Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=1 rows=24 cols=80 scrollback_limit_bytes=10000000
+2026-07-27T16:50:24.794034Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=1 pid=106075
+2026-07-27T16:50:24.794523Z  INFO herdr::logging: workspace created event="workspace.create" subsystem="workspace" outcome="ok" workspace_id="w1" pane_id=1
+2026-07-27T16:50:24.794549Z  INFO herdr::logging: workspace focused event="workspace.focus" subsystem="workspace" outcome="ok" workspace_id="w1"
+2026-07-27T16:50:24.794587Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-07-27T16:50:24.794611Z  INFO herdr::server::headless: created startup workspace cwd=/home/zaid
+2026-07-27T16:50:24.794772Z  INFO herdr::server::headless: client protocol socket listening path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T16:50:24.794859Z  INFO herdr::server::headless: herdr server started api_socket=/home/zaid/.config/herdr/herdr.sock client_socket=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T16:50:24.795727Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="server" outcome="started" pid=106063
+2026-07-27T16:50:25.068742Z  INFO herdr::server::headless: client connected client_id=2 cols=148 rows=36 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T16:50:29.801215Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/zaid/.config/herdr/session.json workspaces=1
+2026-07-27T16:50:29.815015Z  INFO herdr::logging: pane child exited event="pane.exit" subsystem="pane" outcome="completed" pane_id=1 status="ExitStatus { code: 0, signal: None }"
+2026-07-27T16:50:29.815289Z  INFO herdr::pane: pane session terminated pane=1 pid=106075 signal=Hangup
+2026-07-27T16:50:29.817065Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=2 rows=35 cols=122 scrollback_limit_bytes=10000000
+2026-07-27T16:50:29.819697Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=2 pid=106236
+2026-07-27T16:50:29.820077Z  INFO herdr::logging: workspace created event="workspace.create" subsystem="workspace" outcome="ok" workspace_id="w2" pane_id=2
+2026-07-27T16:50:29.820109Z  INFO herdr::logging: workspace focused event="workspace.focus" subsystem="workspace" outcome="ok" workspace_id="w2"
+2026-07-27T16:50:29.820257Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t1"
+2026-07-27T16:50:32.177499Z  INFO herdr::server::headless: client disconnected client_id=2
+2026-07-27T16:50:34.828530Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/zaid/.config/herdr/session.json workspaces=1
+2026-07-27T16:56:04.247102Z  INFO herdr::server::headless: client connected client_id=4 cols=136 rows=32 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T16:56:26.038313Z  INFO herdr::server::headless: client detach requested via keybind client_id=4
+2026-07-27T16:56:26.043750Z  INFO herdr::server::headless: client disconnected client_id=4
+2026-07-27T17:04:03.351034Z  INFO herdr::server::headless: client connected client_id=6 cols=136 rows=32 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T17:04:21.390103Z  INFO herdr::server::headless: client detach requested via keybind client_id=6
+2026-07-27T17:04:21.397701Z  INFO herdr::server::headless: client disconnected client_id=6
+2026-07-27T17:04:28.942392Z  INFO herdr::server::headless: client connected client_id=8 cols=136 rows=32 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T17:05:20.692294Z  INFO herdr::server::headless: client detach requested via keybind client_id=8
+2026-07-27T17:05:20.701426Z  INFO herdr::server::headless: client disconnected client_id=8
+2026-07-27T17:06:19.682712Z  INFO herdr::api::server: api server listening path=/home/zaid/.config/herdr/herdr.sock
+2026-07-27T17:06:19.685252Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=1 rows=24 cols=80 scrollback_limit_bytes=10000000
+2026-07-27T17:06:19.689663Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=1 pid=117116
+2026-07-27T17:06:19.691127Z  INFO herdr::logging: session restore evaluated event="persist.restore" subsystem="persist" outcome="ok" workspaces=1
+2026-07-27T17:06:19.691249Z  INFO herdr::app: using pane scrollback configuration pane_scrollback_limit_bytes=10000000
+2026-07-27T17:06:19.988928Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T17:06:20.016462Z  INFO herdr::server::headless: restored session already has workspaces; ignoring startup cwd cwd=/home/zaid
+2026-07-27T17:06:20.016842Z  INFO herdr::server::headless: client protocol socket listening path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T17:06:20.016939Z  INFO herdr::server::headless: herdr server started api_socket=/home/zaid/.config/herdr/herdr.sock client_socket=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T17:06:20.017892Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="server" outcome="started" pid=117110
+2026-07-27T17:06:20.213967Z  INFO herdr::server::headless: client connected client_id=2 cols=136 rows=32 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T17:07:24.407133Z  INFO herdr::logging: integration action finished event="integration.action" subsystem="integration" outcome="ok" action="install" target="pi"
+2026-07-27T17:07:24.407431Z  INFO herdr::logging: integration action finished event="integration.action" subsystem="integration" outcome="ok" action="install" target="omp"
+2026-07-27T17:07:24.407769Z  INFO herdr::logging: integration action finished event="integration.action" subsystem="integration" outcome="ok" action="install" target="opencode"
+2026-07-27T17:07:24.412505Z  INFO herdr::logging: integration action finished event="integration.action" subsystem="integration" outcome="ok" action="install" target="hermes"
+2026-07-27T17:07:29.418163Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/zaid/.config/herdr/session.json workspaces=1
+2026-07-27T17:07:59.782359Z  INFO herdr::server::headless: client detach requested via keybind client_id=2
+2026-07-27T17:07:59.787796Z  INFO herdr::server::headless: client disconnected client_id=2
+2026-07-27T17:08:48.041679Z  INFO herdr::server::headless: client connected client_id=4 cols=136 rows=32 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T17:09:10.681068Z  INFO herdr::api::server: api server listening path=/home/zaid/.config/herdr/herdr.sock
+2026-07-27T17:09:10.683540Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=1 rows=24 cols=80 scrollback_limit_bytes=10000000
+2026-07-27T17:09:10.686019Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=1 pid=118488
+2026-07-27T17:09:10.686549Z  INFO herdr::logging: session restore evaluated event="persist.restore" subsystem="persist" outcome="ok" workspaces=1
+2026-07-27T17:09:10.686606Z  INFO herdr::app: using pane scrollback configuration pane_scrollback_limit_bytes=10000000
+2026-07-27T17:09:10.954531Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T17:09:10.963599Z  INFO herdr::server::headless: restored session already has workspaces; ignoring startup cwd cwd=/home/zaid
+2026-07-27T17:09:10.963950Z  INFO herdr::server::headless: client protocol socket listening path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T17:09:10.964040Z  INFO herdr::server::headless: herdr server started api_socket=/home/zaid/.config/herdr/herdr.sock client_socket=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T17:09:10.964805Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="server" outcome="started" pid=118482
+2026-07-27T17:09:11.015791Z  INFO herdr::server::headless: client connected client_id=2 cols=136 rows=32 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T17:09:15.301366Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=2 rows=31 cols=110 scrollback_limit_bytes=10000000
+2026-07-27T17:09:15.306261Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=2 pid=118630
+2026-07-27T17:09:15.306900Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t2"
+2026-07-27T17:09:16.597319Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t1"
+2026-07-27T17:09:17.449810Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t2"
+2026-07-27T17:09:18.362877Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t1"
+2026-07-27T17:09:18.995914Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t2"
+2026-07-27T17:09:19.518520Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t1"
+2026-07-27T17:09:24.522432Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/zaid/.config/herdr/session.json workspaces=1
+2026-07-27T17:09:33.186535Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w2" tab_id="w2:t2"
+2026-07-27T17:09:36.953075Z  INFO herdr::pane: agent changed pane=2 previous_agent=None agent=Some(OpenCode) process=opencode pgid=Some(118960)
+2026-07-27T17:09:38.191100Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/zaid/.config/herdr/session.json workspaces=1
+2026-07-27T17:09:40.887346Z  INFO herdr::pane: agent changed pane=2 previous_agent=Some(OpenCode) agent=None pgid=Some(118630)
+2026-07-27T17:09:41.522390Z  INFO herdr::logging: pane child exited event="pane.exit" subsystem="pane" outcome="completed" pane_id=2 status="ExitStatus { code: 1, signal: None }"
+2026-07-27T17:09:41.528473Z  INFO herdr::pane: pane session terminated pane=2 pid=118630 signal=Hangup
+2026-07-27T17:09:41.528798Z  WARN herdr::app::actions: PaneDied for unknown pane pane=2
+2026-07-27T17:09:41.986082Z  INFO herdr::logging: workspace closed event="workspace.close" subsystem="workspace" outcome="ok" workspace_id="w2"
+2026-07-27T17:09:42.003260Z  INFO herdr::logging: pane child exited event="pane.exit" subsystem="pane" outcome="completed" pane_id=1 status="ExitStatus { code: 1, signal: None }"
+2026-07-27T17:09:42.010605Z  INFO herdr::pane: pane session terminated pane=1 pid=118488 signal=Hangup
+2026-07-27T17:09:42.011099Z  WARN herdr::app::actions: PaneDied for unknown pane pane=1
+2026-07-27T17:09:42.011312Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=3 rows=31 cols=110 scrollback_limit_bytes=10000000
+2026-07-27T17:09:42.013952Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=3 pid=119028
+2026-07-27T17:09:42.014552Z  INFO herdr::logging: workspace created event="workspace.create" subsystem="workspace" outcome="ok" workspace_id="w3" pane_id=3
+2026-07-27T17:09:42.014585Z  INFO herdr::logging: workspace focused event="workspace.focus" subsystem="workspace" outcome="ok" workspace_id="w3"
+2026-07-27T17:09:42.014712Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w3" tab_id="w3:t1"
+2026-07-27T17:09:45.103969Z  INFO herdr::server::headless: client disconnected client_id=2
+2026-07-27T17:09:47.024324Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/zaid/.config/herdr/session.json workspaces=1
+2026-07-27T17:12:19.782420Z  INFO herdr::server::headless: client connected client_id=4 cols=148 rows=36 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T17:12:29.666561Z  INFO herdr::server::headless: client disconnected client_id=4
+2026-07-27T17:12:35.199727Z  INFO herdr::server::headless: client connected client_id=6 cols=136 rows=32 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T17:12:42.703153Z  INFO herdr::server::headless: client detach requested via keybind client_id=6
+2026-07-27T17:12:42.710905Z  INFO herdr::server::headless: client disconnected client_id=6

@@ -1,0 +1,32 @@
+2026-07-27T16:50:24.808763Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=106062
+2026-07-27T16:50:24.808866Z  INFO herdr::client: connecting to server path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T16:50:25.062213Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-27T16:56:04.115914Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=114907
+2026-07-27T16:56:04.116085Z  INFO herdr::client: connecting to server path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T16:56:04.246905Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-27T16:56:26.039811Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=114907
+2026-07-27T17:04:03.206914Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=116661
+2026-07-27T17:04:03.207002Z  INFO herdr::client: connecting to server path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T17:04:03.350928Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-27T17:04:21.395101Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=116661
+2026-07-27T17:04:28.693732Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=116744
+2026-07-27T17:04:28.695329Z  INFO herdr::client: connecting to server path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T17:04:28.942223Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-27T17:05:20.695257Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=116744
+2026-07-27T17:06:20.035978Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=117109
+2026-07-27T17:06:20.036067Z  INFO herdr::client: connecting to server path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T17:06:20.207297Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-27T17:07:59.783616Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=117109
+2026-07-27T17:08:47.944881Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=117885
+2026-07-27T17:08:47.944983Z  INFO herdr::client: connecting to server path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T17:08:48.041604Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-27T17:09:10.979044Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=118481
+2026-07-27T17:09:10.979120Z  INFO herdr::client: connecting to server path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T17:09:11.011370Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-27T17:12:19.594312Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=122779
+2026-07-27T17:12:19.594608Z  INFO herdr::client: connecting to server path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T17:12:19.782304Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-27T17:12:34.952905Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=123409
+2026-07-27T17:12:34.952945Z  INFO herdr::client: connecting to server path=/home/zaid/.config/herdr/herdr-client.sock
+2026-07-27T17:12:35.199656Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-27T17:12:42.704745Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=123409
