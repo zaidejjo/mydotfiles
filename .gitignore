@@ -27,3 +27,11 @@ TestResults.xml
 # Node dependencies
 **/node_modules/
 node_modules/
+
+herdr/.config/herdr/.plugins.lock
+herdr/.config/herdr/herdr.sock
+herdr/.config/herdr/herdr-client.log
+herdr/.config/herdr/herdr-client.sock
+herdr/.config/herdr/herdr-server.log
+herdr/.config/herdr/session.json
+herdr/.config/herdr/session-history.json
