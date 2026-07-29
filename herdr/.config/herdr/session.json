@@ -6,13 +6,15 @@
       "custom_name": null,
       "identity_cwd": "/home/zaid",
       "public_pane_numbers": {
+        "4": 2,
         "3": 1
       },
-      "next_public_pane_number": 2,
+      "next_public_pane_number": 3,
       "public_tab_numbers": [
-        1
+        1,
+        2
       ],
-      "next_public_tab_number": 2,
+      "next_public_tab_number": 3,
       "tabs": [
         {
           "custom_name": null,
@@ -27,6 +29,20 @@
           "zoomed": false,
           "focused": 3,
           "root_pane": 3
+        },
+        {
+          "custom_name": null,
+          "layout": {
+            "Pane": 4
+          },
+          "panes": {
+            "4": {
+              "cwd": "/home/zaid"
+            }
+          },
+          "zoomed": false,
+          "focused": 4,
+          "root_pane": 4
         }
       ],
       "active_tab": 0

@@ -92,3 +92,34 @@
 2026-07-27T17:12:35.199727Z  INFO herdr::server::headless: client connected client_id=6 cols=136 rows=32 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
 2026-07-27T17:12:42.703153Z  INFO herdr::server::headless: client detach requested via keybind client_id=6
 2026-07-27T17:12:42.710905Z  INFO herdr::server::headless: client disconnected client_id=6
+2026-07-27T17:39:10.964492Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T18:09:10.960136Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T18:39:10.967793Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T19:09:10.960370Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T19:39:10.961645Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T20:09:10.970640Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T20:16:55.748233Z  INFO herdr::server::headless: client connected client_id=8 cols=151 rows=38 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T20:16:59.794696Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=4 rows=37 cols=125 scrollback_limit_bytes=10000000
+2026-07-27T20:16:59.798977Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=4 pid=165281
+2026-07-27T20:16:59.799803Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w3" tab_id="w3:t2"
+2026-07-27T20:17:00.876340Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w3" tab_id="w3:t1"
+2026-07-27T20:17:01.196010Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w3" tab_id="w3:t2"
+2026-07-27T20:17:01.467415Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w3" tab_id="w3:t1"
+2026-07-27T20:17:01.733123Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w3" tab_id="w3:t2"
+2026-07-27T20:17:02.049119Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w3" tab_id="w3:t1"
+2026-07-27T20:17:02.268942Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w3" tab_id="w3:t2"
+2026-07-27T20:17:02.483163Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w3" tab_id="w3:t1"
+2026-07-27T20:17:07.487900Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/zaid/.config/herdr/session.json workspaces=1
+2026-07-27T20:17:11.462938Z  INFO herdr::server::headless: client detach requested via keybind client_id=8
+2026-07-27T20:17:11.468203Z  INFO herdr::server::headless: client disconnected client_id=8
+2026-07-27T20:27:16.931742Z  INFO herdr::server::headless: client connected client_id=10 cols=151 rows=38 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T20:27:55.126980Z  INFO herdr::server::headless: client detach requested via keybind client_id=10
+2026-07-27T20:27:55.140798Z  INFO herdr::server::headless: client disconnected client_id=10
+2026-07-27T20:39:10.972376Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T21:09:10.981494Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T21:39:10.984091Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T22:09:10.989160Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T22:39:10.985534Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T23:09:10.978569Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T23:39:10.995380Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-28T00:09:10.987100Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"

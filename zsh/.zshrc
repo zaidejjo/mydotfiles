@@ -16,7 +16,6 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 # zinit ice Aloxaf/fzf-tab
 zinit light Aloxaf/fzf-tab
-
 # --- 3. باقي الإضافات بوضع Turbo السريع ---
 zinit wait lucid light-mode for \
     atinit"ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)" \
@@ -123,6 +122,7 @@ alias cls='clear'
 alias cl='clear'
 alias ؤي='cd'
 alias ..='cd ..'
+alias ...='cd ../..'
 alias .3='cd ../..'
 alias .4='cd ../../..'
 alias .5='cd ../../../..'
@@ -333,7 +333,7 @@ _fzf_history_enhanced() {
     zle reset-prompt
 }
 zle -N _fzf_history_enhanced
-bindkey '^[r' _fzf_history_enhanced
+bindkey '^[r' _atuin_search_widget
 
 _fzf_grep_nvim() {
     local res=$(rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/' "" | \
@@ -412,3 +412,4 @@ export CHROME_EXECUTABLE=/usr/bin/brave
 
 # zprof
 export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.atuin/bin:$PATH"
