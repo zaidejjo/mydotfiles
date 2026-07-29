@@ -112,3 +112,14 @@
 2026-07-27T20:17:07.487900Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/zaid/.config/herdr/session.json workspaces=1
 2026-07-27T20:17:11.462938Z  INFO herdr::server::headless: client detach requested via keybind client_id=8
 2026-07-27T20:17:11.468203Z  INFO herdr::server::headless: client disconnected client_id=8
+2026-07-27T20:27:16.931742Z  INFO herdr::server::headless: client connected client_id=10 cols=151 rows=38 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-07-27T20:27:55.126980Z  INFO herdr::server::headless: client detach requested via keybind client_id=10
+2026-07-27T20:27:55.140798Z  INFO herdr::server::headless: client disconnected client_id=10
+2026-07-27T20:39:10.972376Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T21:09:10.981494Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T21:39:10.984091Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T22:09:10.989160Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T22:39:10.985534Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T23:09:10.978569Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-27T23:39:10.995380Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-07-28T00:09:10.987100Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
