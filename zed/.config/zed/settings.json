@@ -1,0 +1,180 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "edit_predictions": {
+    "disabled_globs": [],
+    "allow_data_collection": "no",
+  },
+  "language_models": {
+    "openai_compatible": {},
+  },
+  "terminal": {
+    "font_size": 12.0,
+    "font_family": "JetBrainsMono Nerd Font",
+  },
+  "format_on_save": "on",
+
+  "languages": {
+    "Python": {
+      // 1. تفعيل سيرفر ty لفحص الكود والأنواع
+      "language_servers": ["ty", "..."],
+      "formatter": {
+        "external": {
+          "command": "ruff",
+          "arguments": ["format", "--stdin-filename", "{buffer_path}", "-"],
+        },
+      },
+    },
+
+    "HTML": {
+      "formatter": {
+        "external": {
+          "command": "djlint",
+          "arguments": ["--reformat", "-"],
+        },
+      },
+    },
+
+    "JavaScript": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+
+    "TypeScript": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+
+    "CSS": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+
+    "JSON": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+  },
+
+  "context_servers": {
+    "mcp-server-context7": {
+      "enabled": true,
+      "remote": false,
+      "settings": {},
+    },
+  },
+  "cli_default_open_behavior": "existing_window",
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "agent": {
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
+      "enable_thinking": false,
+    },
+    "profiles": {
+      "coder": {
+        "name": "Coder",
+        "tools": {},
+        "enable_all_context_servers": false,
+        "context_servers": {},
+      },
+    },
+    "default_profile": "write",
+    "default_model": {
+      "effort": "medium",
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
+      "enable_thinking": true,
+    },
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "document_folding_ranges": "on",
+  "semantic_tokens": "combined",
+  "enable_language_server": true,
+  "vim_mode": false,
+  "project_panel": {
+    "dock": "left",
+  },
+  "use_smartcase_search": true,
+  "search": {
+    "whole_word": false,
+  },
+  "minimap": {
+    "thumb_border": "left_open",
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000,
+    },
+  },
+  "agent_servers": {
+    "gemini": {
+      "type": "registry",
+    },
+    "opencode": {
+      "favorite_config_option_values": {
+        "mode": ["coder"],
+      },
+      "default_config_options": {
+        "mode": "coder",
+        "effort": "max",
+        "model": "opencode/deepseek-v4-flash-free",
+      },
+      "type": "registry",
+    },
+    "claude-acp": {
+      "type": "registry",
+    },
+    "github-copilot-cli": {
+      "type": "registry",
+    },
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "icon_theme": {
+    "mode": "dark",
+    "light": "JetBrains New UI Icons (Dark)",
+    "dark": "Material Icon Theme",
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha",
+  },
+}
