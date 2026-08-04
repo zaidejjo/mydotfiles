@@ -1,0 +1,203 @@
+{
+  "html": {
+    "prefix": "html",
+    "body": [
+      "<!DOCTYPE html>",
+      "<html lang=\"${1:en}\">",
+      "<head>",
+      "    <meta charset=\"${2:UTF-8}\">",
+      "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+      "    <title>${3:Document}</title>",
+      "</head>",
+      "<body>",
+      "    ${4:content}",
+      "</body>",
+      "</html>"
+    ],
+    "description": "Basic HTML5 structure"
+  },
+  "div": {
+    "prefix": "div",
+    "body": ["<div class=\"${1:classname}\">${2:content}</div>"],
+    "description": "HTML div element"
+  },
+  "span": {
+    "prefix": "span",
+    "body": ["<span class=\"${1:classname}\">${2:content}</span>"],
+    "description": "HTML span element"
+  },
+  "p": {
+    "prefix": "p",
+    "body": ["<p>${1:content}</p>"],
+    "description": "Paragraph element"
+  },
+  "a": {
+    "prefix": "a",
+    "body": ["<a href=\"${1:#}\" class=\"${2:classname}\">${3:link_text}</a>"],
+    "description": "Anchor tag"
+  },
+  "img": {
+    "prefix": "img",
+    "body": [
+      "<img src=\"${1:path/to/image}\" alt=\"${2:description}\" class=\"${3:classname}\" />"
+    ],
+    "description": "Image tag"
+  },
+  "ul": {
+    "prefix": "ul",
+    "body": [
+      "<ul class=\"${1:classname}\">",
+      "    <li>${2:item1}</li>",
+      "    <li>${3:item2}</li>",
+      "    ${4:more items}",
+      "</ul>"
+    ],
+    "description": "Unordered list"
+  },
+  "ol": {
+    "prefix": "ol",
+    "body": [
+      "<ol class=\"${1:classname}\">",
+      "    <li>${2:item1}</li>",
+      "    <li>${3:item2}</li>",
+      "    ${4:more items}",
+      "</ol>"
+    ],
+    "description": "Ordered list"
+  },
+  "button": {
+    "prefix": "button",
+    "body": [
+      "<button type=\"${1:button}\" class=\"${2:classname}\">${3:label}</button>"
+    ],
+    "description": "Button element"
+  },
+  "form": {
+    "prefix": "form",
+    "body": [
+      "<form action=\"${1:#}\" method=\"${2:post}\" class=\"${3:classname}\">",
+      "    ${4:content}",
+      "</form>"
+    ],
+    "description": "Form element"
+  },
+  "input": {
+    "prefix": "input",
+    "body": [
+      "<input type=\"${1:text}\" name=\"${2:name}\" value=\"${3:}\" class=\"${4:classname}\" />"
+    ],
+    "description": "Input element"
+  },
+  "label": {
+    "prefix": "label",
+    "body": [
+      "<label for=\"${1:input_id}\" class=\"${2:classname}\">${3:Label Text}</label>"
+    ],
+    "description": "Label element"
+  },
+  "link_css": {
+    "prefix": "linkcss",
+    "body": ["<link rel=\"stylesheet\" href=\"${1:style.css}\">"],
+    "description": "Link CSS file"
+  },
+  "script_js": {
+    "prefix": "scriptjs",
+    "body": ["<script src=\"${1:script.js}\"></script>"],
+    "description": "Include JS file"
+  },
+  "extends": {
+    "prefix": "extends",
+    "body": ["{% extends '${1:base.html}' %}"],
+    "description": "Django extends tag"
+  },
+  "block": {
+    "prefix": "block",
+    "body": [
+      "{% block ${1:block_name} %}",
+      "    ${2:content}",
+      "{% endblock ${1:block_name} %}"
+    ],
+    "description": "Django block with automatic endblock name"
+  },
+  "include": {
+    "prefix": "include",
+    "body": ["{% include '${1:filename.html}' %}"],
+    "description": "Django include tag"
+  },
+  "csrf": {
+    "prefix": "csrf",
+    "body": ["{% csrf_token %}"],
+    "description": "Django CSRF token"
+  },
+  "for": {
+    "prefix": "for",
+    "body": [
+      "{% for ${1:item} in ${2:items} %}",
+      "    ${3:content}",
+      "{% endfor %}"
+    ],
+    "description": "Django for loop"
+  },
+  "if": {
+    "prefix": "if",
+    "body": ["{% if ${1:condition} %}", "    ${2:content}", "{% endif %}"],
+    "description": "Django if statement"
+  },
+  "elif": {
+    "prefix": "elif",
+    "body": ["{% elif ${1:condition} %}"],
+    "description": "Django elif statement"
+  },
+  "else": {
+    "prefix": "else",
+    "body": ["{% else %}"],
+    "description": "Django else statement"
+  },
+  "url": {
+    "prefix": "url",
+    "body": ["{% url '${1:view_name}' ${2:args} %}"],
+    "description": "Django URL tag"
+  },
+  "static": {
+    "prefix": "static",
+    "body": ["{% static '${1:path/to/file}' %}"],
+    "description": "Django static tag"
+  },
+  "comment": {
+    "prefix": "comment",
+    "body": ["{% comment %}", "    ${1:content}", "{% endcomment %}"],
+    "description": "Django comment tag"
+  },
+  "filter": {
+    "prefix": "filter",
+    "body": [
+      "{% filter ${1:filter_name} %}",
+      "    ${2:content}",
+      "{% endfilter %}"
+    ],
+    "description": "Django filter block"
+  },
+  "with": {
+    "prefix": "with",
+    "body": [
+      "{% with ${1:var}=${2:value} %}",
+      "    ${3:content}",
+      "{% endwith %}"
+    ],
+    "description": "Django with block"
+  },
+  "autoescape": {
+    "prefix": "autoescape",
+    "body": [
+      "{% autoescape ${1:on/off} %}",
+      "    ${2:content}",
+      "{% endautoescape %}"
+    ],
+    "description": "Django autoescape block"
+  },
+  "verbatim": {
+    "prefix": "verbatim",
+    "body": ["{% verbatim %}", "    ${1:content}", "{% endverbatim %}"],
+    "description": "Django verbatim block"
+  }
+}

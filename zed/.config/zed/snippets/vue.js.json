@@ -1,0 +1,94 @@
+{
+  "Nuxt Base Component": {
+    "prefix": "nbase",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "// SEO & Meta",
+      "useSeoMeta({",
+      "  title: '${1:Page Title}'",
+      "})",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    $0",
+      "  </div>",
+      "</template>"
+    ],
+  },
+  "Nuxt 4 Complete Page": {
+    "prefix": "n4",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "definePageMeta({",
+      "  layout: '${1:default}'",
+      "})",
+      "",
+      "useSeoMeta({",
+      "  title: '${2:Page Title}',",
+      "  description: '${3:Page Description}'",
+      "})",
+      "</script>",
+      "",
+      "<template>",
+      "  <main>",
+      "    $0",
+      "  </main> ",
+      "</template>"
+    ],
+  },
+  "Nuxt Fetch Shortcut": {
+    "prefix": "napi",
+    "body": [
+      "const { data: ${1:data} } = await useFetch('${2:/api/url}')"
+    ],
+  },
+  "Nuxt Define Props": {
+      "prefix": "nprops",
+      "body": [
+        "const props = defineProps<{",
+        "  ${1:propName}: ${2:string};",
+        "}>()"
+      ],
+      "description": "تعريف الـ Props باستخدام TypeScript بشكل سريع"
+    },
+    "Nuxt Define Emits": {
+      "prefix": "nemits",
+      "body": [
+        "const emit = defineEmits<{",
+        "  (e: '${1:eventName}', ${2:value}: ${3:any}): void;",
+        "}>()"
+      ],
+      "description": "تعريف الـ Emits لتمرير الأحداث للعنصر الأب"
+    },
+    "Nuxt Server Route/API": {
+      "prefix": "nserver",
+      "body": [
+        "export default defineEventHandler(async (event) => {",
+        "  $0",
+        "  return {",
+        "    success: true",
+        "  }",
+        "})"
+      ],
+      "description": "هيكل جاهز لملفات الـ API داخل مجلد server/api"
+    },
+    "Nuxt Route Middleware": {
+      "prefix": "nmiddleware",
+      "body": [
+        "export default defineNuxtRouteMiddleware((to, from) => {",
+        "  if (${1:condition}) {",
+        "    return navigateTo('${2:/}')",
+        "  }",
+        "})"
+      ],
+      "description": "إنشاء حارس للمسارات (Route Middleware) بشكل سريع"
+    },
+    "Vue Ref / Reactive": {
+      "prefix": "nref",
+      "body": [
+        "const ${1:state} = ref(${2:initialValue})"
+      ],
+      "description": "إنشاء متغير تفاعلي سريع باستخدام ref"
+    }
+}
