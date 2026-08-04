@@ -2,6 +2,8 @@
 # zmodload zsh/zprof
 
 eval "$(starship init zsh)"
+
+export PATH="$HOME/.atuin/bin:$PATH"
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -16,6 +18,9 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 # zinit ice Aloxaf/fzf-tab
 zinit light Aloxaf/fzf-tab
+zinit light HLissner/zsh-autopair
+zinit light mroth/evalcache
+zinit light ~/.config/atuin/init.zsh
 # --- 3. باقي الإضافات بوضع Turbo السريع ---
 zinit wait lucid light-mode for \
     atinit"ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)" \
@@ -66,7 +71,7 @@ export EDITOR='nvim'
 alias snvim="sudoedit"
 export VISUAL='nvim'
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
-export TERMINAL="wezterm"
+export TERMINAL="kitty"
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585b70"
@@ -135,13 +140,11 @@ alias nsch='nvim $(fzf --preview="bat --color=always {}")'
 alias copy='xsel --input --clipboard'
 alias paste='xsel --output --clipboard'
 alias ls='eza --icons --color=always --group-directories-first'
+alias l='eza --icons --color=always --group-directories-first'
 alias la='eza -a --icons --color=always'
 alias tree='eza -T'
 alias cat='bat --paging=never'
 alias jl='jupyter-lab'
-# alias fref='nvim $(rg --line-number --column --no-heading --color=always --smart-case . | fzf --ansi --delimiter : --preview "bat --color=always --highlight-line {2} {1}" | cut -d: -f1,2 | sed "s/:/ +/")'
-# alias fcp='fzf --preview "bat --color=always {}" | xclip -selection clipboard'
-alias lg='lazygit'
 
 # --- UV & Python Optimized ---
 alias dj='uv run manage.py'
@@ -159,10 +162,6 @@ alias runserver='python manage.py runserver'
 alias gcm='git switch main'
 alias gcd='git switch dev'
 alias gw='git switch'
-alias gcrag='git switch feature/faiss-rag'
-
-# NVChad
-alias nvchad="NVIM_APPNAME=nvchad nvim"
 
 # Wifi
 alias wifi='wlctl'
@@ -184,8 +183,6 @@ compdef _django_custom_completion dj
 
 crun () { g++ -std=c++17 "$1" -o "${1%.cpp}" && "./${1%.cpp}"; }
 
-alias ytdl='yt-dlp -f "bestvideo+bestaudio/best" --merge-output-format mp4'
-alias yt-up='sudo yt-dlp -U'
 alias yt-playlist='yt-dlp -i -x --audio-format mp3 --yes-playlist'
 alias ytmp3='yt-dlp --cookies-from-browser brave -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 
@@ -197,7 +194,6 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
 frg() {
   local rg_prefix="rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/'"
   local initial_query="${*:-}"
@@ -210,13 +206,6 @@ frg() {
       --preview-window 'up,60%,border-bottom,+{2}+3/3' \
       --bind 'enter:become(nvim +{2} {1})'
 }
-fh() { history | fzf; }
-fhi() {
-  local cmd
-  cmd=$(history | fzf | sed 's/^[ ]*[0-9]\+[ ]*//') || return
-  eval "$cmd"
-}
-
 unalias zi 2>/dev/null
 zi() {
   local dir
@@ -290,7 +279,16 @@ export BAT_THEME="Catppuccin Mocha"
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
-
+rep() {
+  # إذا كتبت -i كأول خيار، بتفتح لك fzf لتنقية الملفات
+  if [ "$1" = "-i" ]; then
+    shift
+    sd "$1" "$2" $(rg -l "$1" | fzf -m)
+  else
+    # التبديل السريع في كل الملفات مباشرة
+    sd "$1" "$2" $(rg -l "$1")
+  fi
+}
 vact() {
   local dir="$PWD"
   while [ "$dir" != "/" ]; do
@@ -333,7 +331,6 @@ _fzf_history_enhanced() {
     zle reset-prompt
 }
 zle -N _fzf_history_enhanced
-bindkey '^[r' _atuin_search_widget
 
 _fzf_grep_nvim() {
     local res=$(rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/' "" | \
@@ -361,12 +358,17 @@ bindkey '^[t' _fzf_grep_nvim
 #fi
 
 # --- Tmux Autostart ---
+# --- Tmux Autostart (For ALL terminals) ---
 if [[ $- == *i* ]] && [ -z "$ZELLIJ" ] && [ -z "$TMUX" ]; then
-    if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
-        export TERM="xterm-256color"
-        exec tmux new-session -A -s main
-    fi
+    export TERM="tmux-256color"
+    exec tmux new-session -A -s main
 fi
+# if [[ $- == *i* ]] && [ -z "$ZELLIJ" ] && [ -z "$TMUX" ]; then
+#     if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+#         export TERM="xterm-256color"
+#         exec tmux new-session -A -s main
+#     fi
+# fi
 setxkbmap -option ctrl:nocaps
 
 fastfetch
@@ -410,6 +412,7 @@ export PATH="$PATH:$HOME/flutter/bin"
 export CHROME_EXECUTABLE=/usr/bin/brave
 
 
-# zprof
 export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/.atuin/bin:$PATH"
+eval "$(atuin init zsh)"
+bindkey '^[r' _atuin_search_widget
+# zprof

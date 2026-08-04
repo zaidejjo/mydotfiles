@@ -3,6 +3,9 @@ local wezterm = require("wezterm")
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
+
+config.enable_wayland = false
+
 config.enable_kitty_keyboard = true
 config.enable_csi_u_key_encoding = true
 -- This is where you actually apply your config choices

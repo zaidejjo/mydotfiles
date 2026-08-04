@@ -1,0 +1,9 @@
+--glob=!.git/*
+--glob=!.venv/*
+--glob=!venv/*
+--glob=!staticfiles/*
+--glob=!migrations/*
+--glob=!node_modules/*
+--glob=!__pycache__/*
+--glob=!.pytest_cache/*
+--smart-case

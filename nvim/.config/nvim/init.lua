@@ -4,7 +4,7 @@ vim.opt.termbidi = true
 
 -- ضبط ترميز الملفات بالطريقة الصحيحة المتوافقة مع النوافذ المغلقة
 vim.opt.fileencoding = "utf-8"
-
+vim.opt.clipboard = "unnamedplus"
 -- إعدادات الـ Autocmd والـ Keymaps العادية
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.html",
