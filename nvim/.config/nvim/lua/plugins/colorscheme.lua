@@ -3,6 +3,10 @@ return {
   lazy = true,
   name = "catppuccin",
   opts = {
+    compile = {
+      enabled = true,
+      path = vim.fn.stdpath("cache") .. "/catppuccin",
+    },
     lsp_styles = {
       underlines = {
         errors = { "undercurl" },
