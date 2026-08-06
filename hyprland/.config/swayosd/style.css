@@ -1,0 +1,34 @@
+window {
+  background-color: transparent;
+}
+
+#osd {
+  background-color: rgba(30, 30, 46, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  /* دفع الـ OSD نحو اليمين عبر إضافة هامش أيسر كبير */
+  margin-left: 1100px;
+
+  padding: 8px 14px;
+  min-width: 160px;
+  min-height: 25px;
+}
+
+progressbar {
+  min-height: 5px;
+  border-radius: 3px;
+}
+
+trough {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+progress {
+  background-color: #89b4fa;
+}
+
+image {
+  margin-right: 8px;
+}

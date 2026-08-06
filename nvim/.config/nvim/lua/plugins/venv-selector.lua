@@ -1,10 +1,8 @@
 return {
   "linux-cultist/venv-selector.nvim",
-  branch = "regexp",
   dependencies = {
     "neovim/nvim-lspconfig",
     "nvim-telescope/telescope.nvim",
-    -- <div> نحدد دالة config فارغة لـ nvim-dap لمنع lazy من مناداة setup تلقائياً </div>
     { "mfussenegger/nvim-dap", config = function() end },
     { "mfussenegger/nvim-dap-python", config = function() end },
   },
