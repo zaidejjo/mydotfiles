@@ -170,6 +170,10 @@ alias wifi='wlctl'
 alias mpvfl='mpv --loop-file=yes'
 alias mpvpl='mpv --loop-playlist=inf'
 
+
+alias i='yay -S'
+alias pac='sudo pacman -S'
+
 _django_custom_completion() {
     local -a commands
     commands=(
@@ -405,7 +409,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 alias bnmodule='bunx nuxi@latest module add'
 alias pnmodule='pnx nuxi@latest module add'
 
-[[ -e "/home/zaid/lib/oracle-cli/lib/python3.14/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/zaid/lib/oracle-cli/lib/python3.14/site-packages/oci_cli/bin/oci_autocomplete.sh"
 export PATH_NPM="$HOME/.npm-global/bin"
 export PATH="$PATH:$PATH_NPM"
 export PATH="$PATH:$HOME/flutter/bin"
