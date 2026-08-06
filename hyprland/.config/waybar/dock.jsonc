@@ -1,0 +1,19 @@
+{
+  "name": "dock",
+  "layer": "top",
+  "position": "bottom",
+  "height": 64,
+  "margin-bottom": 10,
+  "passthrough": false,
+  "exclusive": false,
+  "modules-center": ["wlr/taskbar"],
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 36,
+    "icon-theme": "Papirus",
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [],
+  },
+}
