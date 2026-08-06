@@ -1,0 +1,89 @@
+configuration {
+    show-icons: true;
+    drun-display-format: "{name}";
+}
+
+/* استدعاء ألوان ثيم ML4W الديناميكية إن وجدت */
+@import "~/.config/rofi/colors.rasi"
+
+* {
+    /* ألوان افتراضية شفافة في حال عدم تحميل الملف الديناميكي */
+    bg-glass: rgba(15, 15, 23, 0.65);
+    card-bg: rgba(255, 255, 255, 0.05);
+    card-hover: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.15);
+    accent-color: #89b4fa;
+    text-color: #ffffff;
+    
+    background-color: transparent;
+    font: "JetBrainsMono Nerd Font 10";
+}
+
+window {
+    width: 500px;
+    height: 560px;
+    background-color: @bg-glass;
+    border: 1px;
+    border-color: @border-color;
+    border-radius: 20px;
+    padding: 24px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    spacing: 20px;
+}
+
+inputbar {
+    background-color: @card-bg;
+    border: 1px;
+    border-color: @border-color;
+    border-radius: 12px;
+    padding: 12px 16px;
+    children: [ prompt, entry ];
+    spacing: 12px;
+}
+
+prompt {
+    text-color: @accent-color;
+    str: "󰅌";
+}
+
+entry {
+    placeholder: "Search Clipboard History...";
+    placeholder-color: rgba(255, 255, 255, 0.3);
+    text-color: @text-color;
+}
+
+listview {
+    columns: 1;
+    lines: 7;
+    spacing: 10px;
+    cycle: true;
+    dynamic: true;
+}
+
+element {
+    padding: 10px 14px;
+    background-color: @card-bg;
+    border: 1px;
+    border-color: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    children: [ element-icon, element-text ];
+    spacing: 14px;
+}
+
+element selected {
+    background-color: @card-hover;
+    border-color: @accent-color;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: @text-color;
+}
+
+element-icon {
+    size: 54px;
+    border-radius: 8px;
+}

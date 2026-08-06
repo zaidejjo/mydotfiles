@@ -1,0 +1,80 @@
+configuration {
+    show-icons: false;
+}
+
+* {
+    bg-glass: rgba(15, 17, 26, 0.85);
+    card-bg: rgba(255, 255, 255, 0.06);
+    card-hover: rgba(137, 180, 250, 0.25);
+    border-col: rgba(255, 255, 255, 0.12);
+    accent: #89b4fa;
+    text-color: #ffffff;
+    
+    background-color: transparent;
+    font: "JetBrainsMono Nerd Font 11";
+}
+
+window {
+    width: 750px;
+    height: 520px;
+    background-color: @bg-glass;
+    border: 1px;
+    border-color: @border-col;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    spacing: 16px;
+}
+
+inputbar {
+    background-color: @card-bg;
+    border: 1px;
+    border-color: @border-col;
+    border-radius: 12px;
+    padding: 10px 16px;
+    children: [ prompt, entry ];
+    spacing: 10px;
+}
+
+prompt {
+    text-color: @accent;
+    str: "😀";
+}
+
+entry {
+    placeholder: "Search Emojis & Icons (Smile style)...";
+    placeholder-color: rgba(255, 255, 255, 0.35);
+    text-color: @text-color;
+}
+
+/* تقسيم الشبكة مثل تطبيق Smile */
+listview {
+    columns: 4;
+    lines: 6;
+    spacing: 10px;
+    cycle: true;
+    dynamic: true;
+}
+
+element {
+    padding: 12px;
+    background-color: @card-bg;
+    border: 1px;
+    border-color: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    children: [ element-text ];
+}
+
+element selected {
+    background-color: @card-hover;
+    border-color: @accent;
+}
+
+element-text {
+    horizontal-align: 0.0;
+    vertical-align: 0.5;
+    text-color: @text-color;
+}
