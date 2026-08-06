@@ -1,0 +1,78 @@
+configuration {
+    show-icons: false;
+}
+
+* {
+    bg-glass: rgba(15, 17, 26, 0.85);
+    card-bg: rgba(255, 255, 255, 0.05);
+    card-hover: rgba(137, 180, 250, 0.25);
+    border-col: rgba(255, 255, 255, 0.12);
+    accent: #89b4fa;
+    text-color: #ffffff;
+    
+    background-color: transparent;
+    font: "JetBrainsMono Nerd Font 10";
+}
+
+window {
+    width: 800px;
+    height: 600px;
+    background-color: @bg-glass;
+    border: 1px;
+    border-color: @border-col;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    spacing: 16px;
+}
+
+inputbar {
+    background-color: @card-bg;
+    border: 1px;
+    border-color: @border-col;
+    border-radius: 12px;
+    padding: 10px 16px;
+    children: [ prompt, entry ];
+    spacing: 10px;
+}
+
+prompt {
+    text-color: @accent;
+    str: "󰌌";
+}
+
+entry {
+    placeholder: "Search Keybindings (Hyprland & Neovim)...";
+    placeholder-color: rgba(255, 255, 255, 0.35);
+    text-color: @text-color;
+}
+
+listview {
+    columns: 1;
+    lines: 10;
+    spacing: 8px;
+    cycle: true;
+    dynamic: true;
+}
+
+element {
+    padding: 10px 14px;
+    background-color: @card-bg;
+    border: 1px;
+    border-color: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    children: [ element-text ];
+}
+
+element selected {
+    background-color: @card-hover;
+    border-color: @accent;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: @text-color;
+}
