@@ -1,57 +1,80 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
--- ~/.config/nvim/lua/custom/keymaps.lua
-
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
 
-vim.api.nvim_set_keymap("i", "jk", "<Esc>", opts)
-vim.api.nvim_set_keymap("i", "kj", "<Esc>", opts)
+-- Navigation (Line / View)
+map("n", "H", "^", { desc = "First character of line" })
+map("n", "L", "$", { desc = "End of line" })
+map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down & center" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up & center" })
+map("n", "J", "mzJ`z", { desc = "Join lines keeping cursor position" })
 
-vim.keymap.set("n", "<C-]>", ":BufferLineMoveNext<CR>", { noremap = true, silent = true })
+-- Navigation (Line / View) in Normal & Visual Mode
+map({ "n", "v" }, "H", "^", { desc = "First character of line" })
+map({ "n", "v" }, "L", "$", { desc = "End of line" })
 
-vim.keymap.set("n", "<C-[>", ":BufferLineMovePrev<CR>", { noremap = true, silent = true })
+-- Insert Mode Helpers
+map("i", "jk", "<Esc>", opts)
+map("i", "kj", "<Esc>", opts)
+map("i", "jp", [[<C-r>+]], { desc = "Paste from clipboard" })
 
-vim.keymap.set("n", "<C-p>", function()
-  if LazyVim.pick.picker.name == "fzf" then
-    vim.cmd("FzfLua files")
-  else
-    vim.cmd("Telescope find_files")
+-- File & Buffer Operations
+map("n", "<C-a>", "ggVG", { desc = "Select all" })
+map("n", "<leader>w", ":w<CR>", { desc = "Save file" })
+map("n", "<leader>q", ":q<CR>", { desc = "Close window" })
+map("n", "<leader>cx", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make executable" })
+map("n", "<C-]>", ":BufferLineMoveNext<CR>", opts)
+map("n", "<C-[>", ":BufferLineMovePrev<CR>", opts)
+
+-- Editing & Selection
+map({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without copying" })
+map("n", "<A-Down>", ":m .+1<CR>==", opts)
+map("n", "<A-Up>", ":m .-2<CR>==", opts)
+map("v", "<A-Down>", ":m '>+1<CR>gv=gv", opts)
+map("v", "<A-Up>", ":m '<-2<CR>gv=gv", opts)
+
+-- Window Navigation
+map("n", "<leader><Left>", function()
+  vim.cmd("wincmd h")
+  if vim.bo.buftype == "terminal" then
+    vim.cmd("startinsert")
   end
-end, { desc = "Find Files (Ctrl+p)" })
+end, { desc = "Focus left window" })
 
-vim.keymap.set("n", "<C-t>", function()
-  if LazyVim.pick.picker.name == "fzf" then
-    vim.cmd("FzfLua live_grep")
-  else
-    vim.cmd("Telescope live_grep")
+map("n", "<leader><Down>", function()
+  vim.cmd("wincmd j")
+  if vim.bo.buftype == "terminal" then
+    vim.cmd("startinsert")
   end
-end, { desc = "Search Text with Ripgrep (Ctrl+t)" })
+end, { desc = "Focus window below" })
 
--- فتح Themery باستخدام Space + t + h
-vim.keymap.set("n", "<leader>th", "<cmd>Themery<cr>", { desc = "Theme Switcher" })
-
--- تحريك الأسطر في الوضع العادي (Normal Mode)
-vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", { desc = "Move Down", silent = true })
-vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==", { desc = "Move Up", silent = true })
-
--- تحريك الأسطر في وضع التحديد (Visual Mode)
-vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move Down", silent = true })
-vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move Up", silent = true })
-
-vim.keymap.set("n", "<C-S-f>", function()
-  if LazyVim.pick.picker.name == "fzf" then
-    vim.cmd("FzfLua live_grep")
-  else
-    vim.cmd("Telescope live_grep")
+map("n", "<leader><Up>", function()
+  vim.cmd("wincmd k")
+  if vim.bo.buftype == "terminal" then
+    vim.cmd("startinsert")
   end
-end, { desc = "Search Text in Project (Ctrl+Shift+F)" })
+end, { desc = "Focus window above" })
 
-vim.keymap.set("n", "<leader>s", function()
-  if LazyVim.pick.picker.name == "fzf" then
-    vim.cmd("FzfLua live_grep")
-  else
-    vim.cmd("Telescope live_grep")
+map("n", "<leader><Right>", function()
+  vim.cmd("wincmd l")
+  if vim.bo.buftype == "terminal" then
+    vim.cmd("startinsert")
   end
-end, { desc = "Search Text in Project (Leader + s)" })
+end, { desc = "Focus right window" })
+
+-- Window Resizing & Layout
+map("n", "<leader><S-Up>", ":resize +3<CR>", { silent = true, desc = "Increase height" })
+map("n", "<leader><S-Down>", ":resize -3<CR>", { silent = true, desc = "Decrease height" })
+map("n", "<leader><S-Right>", ":vertical resize +3<CR>", { silent = true, desc = "Increase width" })
+map("n", "<leader><S-Left>", ":vertical resize -3<CR>", { silent = true, desc = "Decrease width" })
+map("n", "<leader>wx", "<C-w>x", { desc = "Swap windows" })
+map("n", "<leader>w=", "<C-w>=", { desc = "Equalize window sizes" })
+
+-- Fuzzy Search (FzfLua)
+map("n", "<C-p>", "<cmd>FzfLua files<cr>", { desc = "Find files" })
+map("n", "<C-t>", "<cmd>FzfLua live_grep<cr>", { desc = "Search text (Ripgrep)" })
+map("n", "<C-S-f>", "<cmd>FzfLua live_grep<cr>", { desc = "Search text in project" })
+map("n", "<leader>s", "<cmd>FzfLua live_grep<cr>", { desc = "Search text in project" })
+
+-- Tools & Languages
+map("n", "<leader>th", "<cmd>Themery<cr>", { desc = "Theme switcher" })
+map("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", { desc = "Go error block" })

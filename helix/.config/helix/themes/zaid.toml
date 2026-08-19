@@ -1,0 +1,47 @@
+
+# نبرمج الثيم ليرث كل أساسيات ثيم Catppuccin Mocha
+inherits = "catppuccin_mocha"
+
+# -----------------------------------------------------------------------------
+# 🛠️ إجبار ألوان واجهة المستخدم والرسائل (Total UI Harmony)
+# -----------------------------------------------------------------------------
+"ui.window" = { fg = "surface1" }                    # إطارات تقسيم الشاشة بلون داكن ناعم غير حاد
+"ui.popup" = { bg = "mantle", fg = "text" }          # خلفية النوافذ المنبثقة والشرح الذكي
+"ui.popup.info" = { bg = "crust", fg = "blue" }      # النوافذ الإرشادية الصغيرة
+"ui.help" = { bg = "mantle", fg = "subtext1" }       # شاشات المساعدة لشرح الأوامر
+
+# تلوين شريط الرسائل السفلية والإدخال والأخطاء بدقة
+"ui.text" = { fg = "text" }                          # النصوص العادية والرسائل السفلية
+"ui.text.focus" = { fg = "lavender", modifiers = ["bold"] } # النص النشط المحدد داخل القوائم
+"ui.text.inactive" = { fg = "overlay0" }             # تلميحات الإكمال التلقائي غير النشطة
+
+# -----------------------------------------------------------------------------
+# 🛡️ تلوين التلميحات والأخطاء الذكية المدمجة (Inline Diagnostics Glow)
+# -----------------------------------------------------------------------------
+# هنا نجعل الأخطاء تظهر مرسومة بألوان Catppuccin متناسقة مع العين بدل الألوان الحادة
+"diagnostic.error" = { underline = { color = "red", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "yellow", style = "curl" } }
+"diagnostic.info" = { underline = { color = "sky", style = "line" } }
+"diagnostic.hint" = { underline = { color = "teal", style = "line" } }
+
+"ui.virtual.inlay-hint" = { fg = "overlay1", modifiers = ["italic"] } # تلميحات أنواع المتغيرات الذكية
+"ui.virtual.indent-guide" = { fg = "surface0" }      # خطوط المحاذاة العمودية لتكون خفيفة وأنيقة │
+
+# -----------------------------------------------------------------------------
+# 🎨 لوحة الألوان المرجعية لـ Catppuccin Mocha (Palette)
+# -----------------------------------------------------------------------------
+[palette]
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface1 = "#45475a"
+surface0 = "#313244"
+mantle = "#181825"
+crust = "#111122"
+blue = "#89b4fa"
+lavender = "#b4befe"
+red = "#f38ba8"
+yellow = "#f9e2af"
+sky = "#89dceb"
+teal = "#94e2d5"

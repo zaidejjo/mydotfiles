@@ -13,16 +13,18 @@
     ],
     // Modules Left
     "modules-left": [
-        "custom/appmenu",
+        //"custom/appmenu",
         "hyprland/workspaces",
         //"wlr/taskbar",
         //"group/quicklinks",
-        //"custom/nowplaying",        
         "custom/empty"
     ],
     // Modules Center
     "modules-center": [
         "clock",
+        "custom/quickshell_media",
+        //"mpris",
+        //"custom/nowplaying",
         "custom/empty"
     ],
     // Modules Right    

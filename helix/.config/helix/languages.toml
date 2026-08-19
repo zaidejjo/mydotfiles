@@ -1,0 +1,56 @@
+
+# --- PYTHON CONFIGURATION ---
+[[language]]
+name = "python"
+auto-format = true
+roots = ["pyproject.toml", "setup.py", "requirements.txt", ".git"]
+indent = { tab-width = 4, unit = "    " }
+
+# --- GO CONFIGURATION ---
+[[language]]
+name = "go"
+auto-format = true
+roots = ["go.mod", "go.sum", ".git"]
+language-servers = [ "gopls" ]
+indent = { tab-width = 4, unit = "\t" }
+
+# --- LANGUAGE SERVERS DEFINITIONS ---
+[language-server.gopls]
+command = "/usr/bin/gopls"   # ⚠️ المسار المطلق الذي وجدناه
+
+[language-server.gopls.config]
+completeUnimported = true   # ✅ هذا الخيار مهم للاقتراحات داخل ""
+usePlaceholders = true
+staticcheck = true
+
+# --- TYPESCRIPT CONFIGURATION ---
+[[language]]
+name = "typescript"
+auto-format = true
+language-servers = [ "typescript-language-server" ]
+indent = { tab-width = 2, unit = "  " }
+
+# --- JAVASCRIPT CONFIGURATION ---
+[[language]]
+name = "javascript"
+auto-format = true
+language-servers = [ "typescript-language-server" ]
+indent = { tab-width = 2, unit = "  " }
+
+# --- BASH CONFIGURATION ---
+[[language]]
+name = "bash"
+auto-format = true
+roots = [".git"]
+language-servers = [ "bash-language-server" ]
+indent = { tab-width = 2, unit = "  " }
+
+# --- LANGUAGE SERVERS DEFINITIONS ---
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+config = { format = { "semicolons" = "insert", "insertSpaceBeforeFunctionParenthesis" = true } }
+
+[language-server.bash-language-server]
+command = "bash-language-server"
+args = ["start"]

@@ -1,0 +1,158 @@
+# Theme & Appearance
+theme = "zaid"
+
+# General Editor Configuration
+[editor]
+line-number = "relative"
+mouse = true
+scrolloff = 5
+rulers = []
+default-yank-register = "+"
+bufferline = "multiple"
+color-modes = true
+cursorline = true
+completion-trigger-len = 2
+completion-timeout = 5
+continue-comments = true
+trim-trailing-whitespace = true
+popup-border = "all"
+
+# File Picker Options
+[editor.file-picker]
+hidden = false      # Include hidden files like .env
+git-ignore = true  # Respect .gitignore files
+
+# Auto Save
+[editor.auto-save]
+focus-lost = true  # Save automatically on focus lost
+
+# Search Optimization
+[editor.search]
+smart-case = true   # Smart case search
+wrap-around = true  # Wrap around search results
+
+# Indent Guides
+[editor.indent-guides]
+render = true
+character = "│"
+skip-levels = 0
+
+# Inline Diagnostics
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "error"
+prefix-len = 2
+
+# Gutters Customization
+[editor.gutters]
+layout = ["diff", "diagnostics", "line-numbers", "spacer"]
+
+[editor.gutters.line-numbers]
+min-width = 1
+
+# Soft Wrap Configuration
+[editor.soft-wrap]
+enable = true
+max-wrap = 25
+wrap-indicator = "↪ "
+
+# Cursor Shape Configuration
+[editor.cursor-shape]
+normal = "block"
+insert = "bar"
+select = "underline"
+
+# LSP & Code Intelligence
+[editor.lsp]
+enable = true
+display-messages = true
+display-progress-messages = true
+display-inlay-hints = true
+inlay-hints-length-limit = 30
+auto-signature-help = true
+display-signature-help-docs = true
+display-color-swatches = true
+snippets = true
+goto-reference-include-declaration = true
+
+# Custom Statusline
+[editor.statusline]
+separator = "│"
+left = ["mode", "spinner", "version-control", "read-only-indicator", "file-modification-indicator"]
+center = ["file-name"]
+right = ["diagnostics", "workspace-diagnostics", "file-type", "file-line-ending", "selections", "register", "position", "position-percentage"]
+
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+diagnostics = ["warning", "error"]
+workspace-diagnostics = ["warning", "error"]
+
+# Advanced Key Remapping
+[keys.normal]
+# Clear selection with Esc
+esc = ["collapse_selection", "keep_primary_selection"]
+
+# Quick save
+"C-s" = ":write"
+
+# Select all
+"C-a" = ["goto_file_start", "select_all"]
+
+# Go to last line (G)
+"G" = "goto_last_line"
+
+# Line selection mode (V)
+"V" = ["extend_to_line_bounds", "select_mode"]
+
+# Delete line without copying to register (Alt+d)
+"A-d" = "@x<A-d>"
+
+# Arrow keys disabling (optional training)
+#"left" = "no_op"
+#"right" = "no_op"
+#"up" = "no_op"
+#"down" = "no_op"
+
+# Search word under cursor (*)
+"*" = ["move_char_right", "move_char_left", "search_selection"]
+
+# Quick line movement
+"H" = "goto_line_start"
+"L" = "goto_line_end"
+
+# Toggle comments with Ctrl+/
+"C-c" = "toggle_comments"
+
+"n" = ["search_next", "align_view_center"]
+"N" = ["search_prev", "align_view_center"]
+
+[keys.normal.space]
+# Surround the current selection immediately
+s = "surround_add"
+
+# Sub-menu for other surround actions (Space -> m)
+m = { w = ["move_prev_word_start", "move_next_word_end", "surround_add"], r = "surround_replace", d = "surround_delete" }
+
+
+# Toggle line comment sequence (gcc)
+[keys.normal.g]
+c = { c = ["extend_to_line_bounds", "toggle_comments", "collapse_selection"] }
+
+[keys.insert]
+"C-s" = ["normal_mode", ":write"]
+"j" = { "k" = "normal_mode" } # Exit insert mode with jk
+"C-c" = ["normal_mode", "toggle_comments", "insert_mode"] # Toggle comment in insert mode
+
+[keys.select]
+"p" = "replace_with_yanked" # Replace selection with yanked text
+"H" = "extend_to_line_start" # Extend selection to line start
+"L" = "extend_to_line_end"   # Extend selection to line end
+"G" = ["select_mode", "extend_to_file_end"] # Extend selection to the last line
+
+[keys.select.space]
+s = "surround_add"
+
+# Toggle comment sequence for selection (gc)
+[keys.select.g]
+c = "toggle_comments"

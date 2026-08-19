@@ -80,8 +80,8 @@ hl.bind(
 )
 hl.bind(
 	mainMod .. " + M",
-	hl.dsp.exec_cmd("~/.config/hypr/scripts/rofi-media.sh"),
-	{ description = "Open MPV Media Player Menu" }
+	hl.dsp.exec_cmd("quickshell -p ~/.config/quickshell/MediaPlayer ipc call media-player toggle"),
+	{ description = "Open Music Player" }
 )
 -- hl.bind(
 -- 	mainMod .. " + M",
@@ -187,7 +187,7 @@ hl.bind(
 	hl.dsp.exec_cmd("~/.config/hypr/scripts/rofi-cheatsheet.sh"),
 	{ description = "Open Dynamic Keybindings Cheatsheet" }
 )
-hl.bind(mainMod .. " + CTRL + P", hl.dsp.exec_cmd("qs ipc call power toggle"), { description = "Start Power Menu" })
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call power toggle"), { description = "Start Power Menu" })
 hl.bind(
 	mainMod .. " + SHIFT + W",
 	hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-wallpaper-app --random"),
@@ -244,11 +244,6 @@ hl.bind(
 	mainMod .. " + CTRL + T",
 	hl.dsp.exec_cmd("~/.config/waybar/themeswitcher.sh"),
 	{ description = "Open waybar theme switcher" }
-)
-hl.bind(
-	mainMod .. " + M",
-	hl.dsp.exec_cmd("~/.config/hypr/scripts/rofi-media-player.sh"),
-	{ description = "Open Advanced MPV Media Player" }
 )
 hl.bind(
 	mainMod .. " + CTRL + S",
@@ -363,3 +358,68 @@ hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true, des
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true, description = "Pause audio" })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true, description = "Play audio" })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true, description = "Previous track" })
+
+-- Toggle Desktop
+local last_workspace = 1
+hl.bind(mainMod .. " + D", function()
+	local current_ws = hl.get_active_workspace().id
+	local target_ws = 10
+
+	if current_ws == target_ws then
+		-- إذا كنا في 10، ارجع للـ workspace السابقة
+		hl.dispatch(hl.dsp.focus({ workspace = last_workspace }))
+	else
+		-- احفظ الـ workspace الحالية وانتقل إلى 10
+		last_workspace = current_ws
+		hl.dispatch(hl.dsp.focus({ workspace = target_ws }))
+	end
+end, { description = "Toggle desktop workspace" })
+
+-- move the next empty workspace
+hl.bind(mainMod .. " + N", function()
+	hl.dispatch(hl.dsp.focus({ workspace = "empty" }))
+end, { description = "Focus next empty workspace" })
+
+-- Move active window and focus or silently to a workspace
+for i = 1, 10 do
+	local key = i % 10 -- 10 maps to key 0
+	if is_fr then
+		key = fr_keys[i]
+	end
+
+	-- 1. Focus Workspace (SUPER + الرقم)
+	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }), { description = "Focus workspace " .. i })
+
+	-- 2. Move window and follow (SUPER + SHIFT + CTRL + الرقم)
+	hl.bind(
+		mainMod .. " + SHIFT + CTRL + " .. key,
+		hl.dsp.window.move({ workspace = i }),
+		{ description = "Move window and follow to workspace " .. i }
+	)
+
+	-- 3. Move window silently (SUPER + CTRL + الرقم)
+	hl.bind(
+		mainMod .. " + CTRL + " .. key,
+		hl.dsp.window.move({ workspace = i, silent = true }),
+		{ description = "Move window silently to workspace " .. i }
+	)
+end
+
+hl.bind(
+	mainMod .. " + CTRL + N",
+	hl.dsp.exec_cmd("quickshell -p ~/.config/quickshell/MediaPlayer ipc call media-player next"),
+	{ description = "Next track" }
+)
+
+hl.bind(
+	mainMod .. " + CTRL + P",
+	hl.dsp.exec_cmd("quickshell -p ~/.config/quickshell/MediaPlayer ipc call media-player previous"),
+	{ description = "Previous track" }
+)
+
+hl.bind(
+	mainMod .. " + CTRL + SPACE",
+	hl.dsp.exec_cmd("quickshell -p ~/.config/quickshell/MediaPlayer ipc call media-player togglePlayPause"),
+	{ description = "Previous track" }
+)
+

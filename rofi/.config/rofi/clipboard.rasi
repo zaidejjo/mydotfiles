@@ -14,7 +14,7 @@ configuration {
     border-color: rgba(255, 255, 255, 0.15);
     accent-color: #89b4fa;
     text-color: #ffffff;
-    
+
     background-color: transparent;
     font: "JetBrainsMono Nerd Font 10";
 }
@@ -86,4 +86,91 @@ element-text {
 element-icon {
     size: 54px;
     border-radius: 8px;
+}
+configuration {
+    show-icons: true;
+    drun-display-format: "{name}";
+}
+
+@import "~/.config/rofi/colors.rasi"
+
+* {
+    bg-glass: rgba(15, 15, 23, 0.75);
+    card-bg: rgba(255, 255, 255, 0.04);
+    card-hover: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.12);
+    accent-color: #89b4fa;
+    text-color: #cdd6f4;
+
+    background-color: transparent;
+    font: "JetBrainsMono Nerd Font 10";
+}
+
+window {
+    width: 650px;
+    height: 520px;
+    background-color: @bg-glass;
+    border: 1px;
+    border-color: @border-color;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    spacing: 16px;
+}
+
+inputbar {
+    background-color: @card-bg;
+    border: 1px;
+    border-color: @border-color;
+    border-radius: 12px;
+    padding: 10px 14px;
+    children: [ prompt, entry ];
+    spacing: 10px;
+}
+
+prompt {
+    text-color: @accent-color;
+}
+
+entry {
+    placeholder: "Search Clipboard...";
+    placeholder-color: rgba(255, 255, 255, 0.3);
+    text-color: @text-color;
+}
+
+listview {
+    columns: 1;
+    lines: 6;
+    spacing: 8px;
+    cycle: true;
+    dynamic: true;
+    fixed-height: false;
+}
+
+element {
+    padding: 8px 12px;
+    background-color: @card-bg;
+    border: 1px;
+    border-color: transparent;
+    border-radius: 10px;
+    children: [ element-icon, element-text ];
+    spacing: 12px;
+}
+
+element selected {
+    background-color: @card-hover;
+    border-color: @accent-color;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: @text-color;
+}
+
+element-icon {
+    size: 48px;
+    border-radius: 6px;
 }

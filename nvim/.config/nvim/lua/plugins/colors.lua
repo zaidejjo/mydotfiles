@@ -1,6 +1,6 @@
 return {
   "brenoprata10/nvim-highlight-colors",
-  event = "BufReadPre",
+  event = "VeryLazy",
   opts = {
     render = "background",
     enable_tailwind = true,
