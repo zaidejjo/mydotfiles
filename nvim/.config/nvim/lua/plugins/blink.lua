@@ -60,13 +60,6 @@ return {
             dictionary_directories = {
               vim.fn.expand("~/.config/nvim/dictionary"),
             },
-
-            -- أو استخدم هذا الخيار إذا كنت تشير إلى ملفات محددة بالاسم
-            -- dictionary_files = {
-            --   vim.fn.expand("~/.config/nvim/dictionary/clean_words.txt"),
-            --   vim.fn.expand("~/.config/nvim/dictionary/tech.txt"),
-            --   vim.fn.expand("~/.config/nvim/dictionary/personal.txt"),
-            -- },
           },
         },
       },

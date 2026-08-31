@@ -313,6 +313,14 @@ hl.bind(
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }), { description = "Switch to next workspace" })
 hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }), { description = "Switch to previous workspace" })
 
+-- Next and Previous Workspace
+hl.bind(mainMod .. " + bracketright", hl.dsp.focus({ workspace = "e+1" }), { description = "Switch to next workspace" })
+hl.bind(
+	mainMod .. " + bracketleft",
+	hl.dsp.focus({ workspace = "e-1" }),
+	{ description = "Switch to previous workspace" }
+)
+
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true, description = "Move window with the mouse" })
 hl.bind(
@@ -422,4 +430,3 @@ hl.bind(
 	hl.dsp.exec_cmd("quickshell -p ~/.config/quickshell/MediaPlayer ipc call media-player togglePlayPause"),
 	{ description = "Previous track" }
 )
-

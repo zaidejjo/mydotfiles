@@ -9,11 +9,13 @@ hl.gesture({
 	action = "workspace",
 })
 
--- Workspaces (Left / Right)
+-- Snappy Switcher (Left / Right with 3 fingers)
 hl.gesture({
 	fingers = 3,
 	direction = "horizontal",
-	action = "workspace",
+	action = function()
+		hl.dispatch(hl.dsp.exec_cmd("snappy-switcher next --mod alt"))
+	end,
 })
 
 -- Scrolling

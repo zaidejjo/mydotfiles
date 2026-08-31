@@ -2,32 +2,43 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.5",
+    cmd = "Telescope",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
 
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPost", "BufNewFile" },
+    build = ":TSUpdate",
+  },
 
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("lualine").setup()
-    end,
+    event = "VeryLazy",
+    opts = {},
   },
 
   {
     "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup({})
-    end,
+    event = "InsertEnter",
+    opts = {},
   },
+
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
+    keys = {
+      {
+        "<leader>A",
+        function()
+          require("harpoon"):list():add()
+        end,
+        desc = "Harpoon Add",
+      },
+    },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      local harpoon = require("harpoon")
-      harpoon:setup()
+      require("harpoon"):setup()
     end,
   },
 }

@@ -64,7 +64,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always --ico
 [ -f ~/.pypi_secrets ] && source ~/.pypi_secrets
 [ -f ~/.secrets ] && source ~/.secrets
 
-my_editor="helix"
+my_editor="nvim"
 
 export EDITOR="$my_editor"
 export VISUAL="$my_editor"
@@ -116,8 +116,6 @@ bindkey '^[^[[3;5~' kill-word
 bindkey '^Z' undo
 bindkey "^[[1;5C" forward-word  # Ctrl + Right Arrow
 bindkey "^[[1;5D" backward-word # Ctrl + Left Arrow
-bindkey "^[b" backward-word     # Alt + Left Arrow
-bindkey "^[f" forward-word      # Alt + Right Arrow
 bindkey '^[[3~' delete-char
 bindkey '^[3;5~' delete-char
 
@@ -229,7 +227,18 @@ _django_custom_completion() {
 }
 compdef _django_custom_completion dj
 
-crun() { g++ -std=c++17 "$1" -o "${1%.cpp}" && "./${1%.cpp}"; }
+crun () {
+    local filename="$1"
+    local extension="${filename##*.}"
+    
+    if [[ "$extension" == "cpp" ]]; then
+        g++ -std=c++17 "$filename" -o "${filename%.cpp}" && "./${filename%.cpp}"
+    elif [[ "$extension" == "c" ]]; then
+        gcc "$filename" -o "${filename%.c}" && "./${filename%.c}"
+    else
+        echo "The file must be c/c++ file"
+    fi
+}
 
 alias yt-playlist='yt-dlp -i -x --audio-format mp3 --yes-playlist'
 alias ytmp3='yt-dlp --cookies-from-browser brave -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
@@ -397,61 +406,47 @@ bindkey '^[t' _fzf_grep_nvim
 [ -f ~/.navi_init.zsh ] && source ~/.navi_init.zsh
 [ -f ~/.zoxide_init.zsh ] && source ~/.zoxide_init.zsh
 
-# --- Zellij Autostart ---
-#if [[ $- == *i* ]] && [ -z "$ZELLIJ" ] && [ -z "$TMUX" ]; then
-#   if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
-#       export TERM="xterm-256color"
-#       exec zellij attach --create main
-#   fi
-#fi
 
-# --- Tmux Autostart ---
 # --- Tmux Autostart (For ALL terminals) ---
 if [[ $- == *i* ]] && [ -z "$ZELLIJ" ] && [ -z "$TMUX" ]; then
   export TERM="tmux-256color"
   exec tmux new-session -A -s main
 fi
-# if [[ $- == *i* ]] && [ -z "$ZELLIJ" ] && [ -z "$TMUX" ]; then
-#     if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
-#         export TERM="xterm-256color"
-#         exec tmux new-session -A -s main
-#     fi
-# fi
 
 fastfetch
 
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin
-export PATH="$PATH:$ANDROID_HOME/tools/bin"
+# export ANDROID_HOME=$HOME/Android/Sdk
+# export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin
+# export PATH="$PATH:$ANDROID_HOME/tools/bin"
 
-export NVM_DIR="$HOME/.config/nvm"
-
-_load_nvm() {
-  unset -f nvm node npm npx yarn
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-}
-
-nvm() {
-  _load_nvm
-  nvm "$@"
-}
-node() {
-  _load_nvm
-  node "$@"
-}
-npm() {
-  _load_nvm
-  npm "$@"
-}
-npx() {
-  _load_nvm
-  npx "$@"
-}
-yarn() {
-  _load_nvm
-  yarn "$@"
-}
+# export NVM_DIR="$HOME/.config/nvm"
+#
+# _load_nvm() {
+#   unset -f nvm node npm npx yarn
+#   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# }
+#
+# nvm() {
+#   _load_nvm
+#   nvm "$@"
+# }
+# node() {
+#   _load_nvm
+#   node "$@"
+# }
+# npm() {
+#   _load_nvm
+#   npm "$@"
+# }
+# npx() {
+#   _load_nvm
+#   npx "$@"
+# }
+# yarn() {
+#   _load_nvm
+#   yarn "$@"
+# }
 
 export OPENCODE_EXPERIMENTAL_CACHE_STABILIZATION=1
 export OPENCODE_CACHE_AUDIT=1

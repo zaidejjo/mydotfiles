@@ -4,33 +4,15 @@ return {
     priority = 1000,
     name = "catppuccin",
     opts = {
+      flavour = "mocha",
       compile = {
         enabled = true,
         path = vim.fn.stdpath("cache") .. "/catppuccin",
       },
-      integrations = {
-        aerial = true,
-        alpha = true,
-        cmp = true,
-        dashboard = true,
-        flash = true,
-        fzf = true,
-        grug_far = true,
-        gitsigns = true,
-        headlines = true,
-        illuminate = true,
-        indent_blankline = { enabled = true },
-        leap = true,
-        lsp_trouble = true,
-        mason = true,
-        mini = true,
-        neotree = true,
-        noice = true,
-        notify = true,
-        snacks = true,
-        treesitter_context = true,
-        which_key = true,
-      },
     },
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
+      vim.cmd.colorscheme("catppuccin")
+    end,
   },
 }
