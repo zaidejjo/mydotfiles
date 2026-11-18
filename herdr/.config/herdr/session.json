@@ -2,34 +2,18 @@
   "version": 3,
   "workspaces": [
     {
-      "id": "w3",
+      "id": "w5",
       "custom_name": null,
       "identity_cwd": "/home/zaid",
       "public_pane_numbers": {
-        "4": 2,
-        "3": 1
+        "4": 1
       },
-      "next_public_pane_number": 3,
+      "next_public_pane_number": 2,
       "public_tab_numbers": [
-        1,
-        2
+        1
       ],
-      "next_public_tab_number": 3,
+      "next_public_tab_number": 2,
       "tabs": [
-        {
-          "custom_name": null,
-          "layout": {
-            "Pane": 3
-          },
-          "panes": {
-            "3": {
-              "cwd": "/home/zaid"
-            }
-          },
-          "zoomed": false,
-          "focused": 3,
-          "root_pane": 3
-        },
         {
           "custom_name": null,
           "layout": {

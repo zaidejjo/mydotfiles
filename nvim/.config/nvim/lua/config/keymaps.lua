@@ -6,6 +6,7 @@ map("n", "H", "^", { desc = "First character of line" })
 map("n", "L", "$", { desc = "End of line" })
 map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down & center" })
 map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up & center" })
+map("n", "<C-z>", "<Nop>", { desc = "Unbind Ctrl+Z" })
 map("n", "J", "mzJ`z", { desc = "Join lines keeping cursor position" })
 
 -- Navigation (Line / View) in Normal & Visual Mode

@@ -61,7 +61,7 @@ new_cwd = "follow"
 # Named punctuation such as minus, comma, ampersand, plus, and backtick is also accepted.
 # Most reliable direct bindings are ctrl+letter, function keys, and explicit modified chords.
 # alt+..., cmd/super, and punctuation-with-modifiers may depend on your terminal/tmux setup.
-prefix = "ctrl+x"
+prefix = "ctrl+b"
 
 # Prefix-mode actions
 # help = "prefix+?"
@@ -247,15 +247,15 @@ mouse_capture = true
 
 delivery = "system"
 [ui.toast.herdr]
-# position = "bottom-right"
+position = "bottom-right"
 
 [ui.toast.clipboard]
-# enabled = true
-# position = "bottom-center"
+enabled = true
+position = "bottom-center"
 
 # Play sounds when agents change state in background workspaces
 [ui.sound]
-# enabled = true
+enabled = true
 # Optional custom mp3 sound files. Relative paths are resolved from this config file's directory.
 # path = "sounds/notification.mp3"   # one mp3 file for all sound notifications
 # done_path = "sounds/done.mp3"      # overrides only finished notifications
@@ -263,8 +263,8 @@ delivery = "system"
 
 # Per-agent overrides: default | on | off
 # By default, droid is muted.
-# [ui.sound.agents]
-# droid = "off"
+[ui.sound.agents]
+droid = "off"
 
 [session]
 # Resume supported AI-agent panes into their native conversation sessions after

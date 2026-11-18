@@ -1,5 +1,22 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "./plugins/caveman/plugin.js",
+    "opencode-goal-plugin@0.11.0",
+    "@plannotator/opencode@latest",
+  ],
+  "provider": "nvidia-custom", // ← Selects the NVIDIA custom provider
+  "models": {
+    // ← Provider definition
+    "nvidia-custom": {
+      "package": "aisdk:@ai-sdk/openai-compatible", // ← Now installed!
+      "settings": {
+        "baseURL": "https://integrate.api.nvidia.com/v1", // ← FIXED (was nvidia.com)
+        "apiKey": "{env:NVIDIA_API_KEY}",
+      },
+    },
+  },
+  "model": "nvidia-custom:deepseek-ai/deepseek-v4.1-flash",
 
   "agent": {
     "architect": {
@@ -94,26 +111,40 @@
   },
 
   "mcp": {
-    "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp",
-    },
-    "git-mcp": {
-      "type": "local",
-      "command": ["git-mcp-server"],
-      "enabled": true,
-    },
-    "sequential-thinking": {
-      "type": "local",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-everything"],
-      "enabled": true,
+    "servers": {
+      "context7": {
+        "type": "remote",
+        "url": "https://mcp.context7.com/mcp",
+      },
+      "cloudflare": {
+        "type": "remote",
+        "url": "https://mcp.cloudflare.com/mcp",
+        "enabled": true,
+        "oauth": {},
+      },
     },
   },
-  "lsp": true,
-  "formatter": true,
+  "lsp": {
+    "zz": {
+      "command": ["zz-lsp"],
+      "extensions": [".zz"],
+    },
+  },
+  "formatter": {
+    "zz": {
+      "command": ["zz", "fmt", "$FILE"],
+      "extensions": [".zz"],
+    },
+  },
   "compaction": {
-    "auto": true,
     "prune": true,
-    "threshold": 0.4,
+    "auto": true,
+  },
+  "scrool_speed": 10,
+  "attention": {
+    "enabled": true,
+    "notifications": true,
+    "sound": true,
+    "volume": 0.4,
   },
 }

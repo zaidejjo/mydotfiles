@@ -123,3 +123,85 @@
 2026-07-27T23:09:10.978569Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
 2026-07-27T23:39:10.995380Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
 2026-07-28T00:09:10.987100Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-11-03T16:33:52.286726Z  INFO herdr::api::server: api server listening path=/home/zaid/.config/herdr/herdr.sock
+2026-11-03T16:33:52.294967Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=1 rows=24 cols=80 scrollback_limit_bytes=10000000
+2026-11-03T16:33:52.303531Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=1 pid=1726109
+2026-11-03T16:33:52.309757Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=2 rows=24 cols=80 scrollback_limit_bytes=10000000
+2026-11-03T16:33:52.315436Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=2 pid=1726112
+2026-11-03T16:33:52.316024Z  INFO herdr::logging: session restore evaluated event="persist.restore" subsystem="persist" outcome="ok" workspaces=1
+2026-11-03T16:33:52.316090Z  INFO herdr::app: using pane scrollback configuration pane_scrollback_limit_bytes=10000000
+2026-11-03T16:33:52.719443Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-11-03T16:33:52.734466Z  INFO herdr::server::headless: restored session already has workspaces; ignoring startup cwd cwd=/home/zaid/Projects/zz_lang
+2026-11-03T16:33:52.734702Z  INFO herdr::server::headless: client protocol socket listening path=/home/zaid/.config/herdr/herdr-client.sock
+2026-11-03T16:33:52.734778Z  INFO herdr::server::headless: herdr server started api_socket=/home/zaid/.config/herdr/herdr.sock client_socket=/home/zaid/.config/herdr/herdr-client.sock
+2026-11-03T16:33:52.740369Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="server" outcome="started" pid=1726103
+2026-11-03T16:33:52.869420Z  INFO herdr::server::headless: client connected client_id=2 cols=166 rows=37 cell_width_px=0 cell_height_px=0 render_encoding=SemanticFrame
+2026-11-03T16:33:53.370883Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T16:33:53.370933Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T16:33:53.370949Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T16:33:53.432468Z  INFO herdr::logging: update available event="update.available" subsystem="update" outcome="ok" version="0.9.5"
+2026-11-03T16:33:53.432521Z  INFO herdr::update: new stable build available at https://github.com/herdrdev/herdr/releases/download/v0.9.5/herdr-linux-x86_64
+2026-11-03T16:33:53.433219Z  INFO herdr::update: auto-update check: 0.9.5 available, waiting for explicit install
+2026-11-03T16:34:16.827401Z  INFO herdr::logging: pane child exited event="pane.exit" subsystem="pane" outcome="completed" pane_id=1 status="ExitStatus { code: 0, signal: None }"
+2026-11-03T16:34:16.828302Z  INFO herdr::pane: pane session terminated pane=1 pid=1726109 signal=Hangup
+2026-11-03T16:34:18.924152Z  INFO herdr::logging: pane child exited event="pane.exit" subsystem="pane" outcome="completed" pane_id=2 status="ExitStatus { code: 0, signal: None }"
+2026-11-03T16:34:18.924569Z  INFO herdr::pane: pane session terminated pane=2 pid=1726112 signal=Hangup
+2026-11-03T16:34:18.926231Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=3 rows=36 cols=140 scrollback_limit_bytes=10000000
+2026-11-03T16:34:18.932567Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=3 pid=1726841
+2026-11-03T16:34:18.934608Z  INFO herdr::logging: workspace created event="workspace.create" subsystem="workspace" outcome="ok" workspace_id="w4" pane_id=3
+2026-11-03T16:34:18.934682Z  INFO herdr::logging: workspace focused event="workspace.focus" subsystem="workspace" outcome="ok" workspace_id="w4"
+2026-11-03T16:34:18.934940Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w4" tab_id="w4:t1"
+2026-11-03T16:34:21.715946Z  INFO herdr::logging: pane child exited event="pane.exit" subsystem="pane" outcome="completed" pane_id=3 status="ExitStatus { code: 0, signal: None }"
+2026-11-03T16:34:21.716344Z  INFO herdr::pane: pane session terminated pane=3 pid=1726841 signal=Hangup
+2026-11-03T16:34:21.716673Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=4 rows=36 cols=140 scrollback_limit_bytes=10000000
+2026-11-03T16:34:21.721791Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=4 pid=1727011
+2026-11-03T16:34:21.722827Z  INFO herdr::logging: workspace created event="workspace.create" subsystem="workspace" outcome="ok" workspace_id="w5" pane_id=4
+2026-11-03T16:34:21.722880Z  INFO herdr::logging: workspace focused event="workspace.focus" subsystem="workspace" outcome="ok" workspace_id="w5"
+2026-11-03T16:34:21.723163Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w5" tab_id="w5:t1"
+2026-11-03T16:34:23.110085Z  INFO herdr::server::headless: client disconnected client_id=2
+2026-11-03T16:34:26.751069Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/zaid/.config/herdr/session.json workspaces=1
+2026-11-03T17:03:53.100654Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T17:03:53.101556Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T17:03:53.101584Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T17:33:53.477183Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T17:33:53.479350Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T17:33:53.479383Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T18:03:53.416064Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T18:03:53.418571Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T18:03:53.418618Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T18:33:53.166013Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T18:33:53.167167Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T18:33:53.167199Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T19:03:53.320383Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T19:03:53.322197Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T19:03:53.322283Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T19:33:53.145898Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T19:33:53.146582Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T19:33:53.146601Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T20:03:53.430184Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T20:03:53.432070Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T20:03:53.432114Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T20:33:53.058713Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T20:33:53.059595Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T20:33:53.059625Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T21:03:53.104627Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T21:03:53.105252Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T21:03:53.105273Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T21:33:53.832105Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T21:33:53.843096Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T21:33:53.843544Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T22:03:53.213120Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T22:03:53.214422Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T22:03:53.214481Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T22:33:53.297577Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T22:33:53.300125Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T22:33:53.300197Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T23:03:53.111904Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T23:03:53.112980Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T23:03:53.113003Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-03T23:33:53.067967Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-03T23:33:53.068793Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-03T23:33:53.068815Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"
+2026-11-04T00:03:53.046530Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="letta"
+2026-11-04T00:03:53.047186Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="muse"
+2026-11-04T00:03:53.047206Z  WARN herdr::detect::manifest_update: skipping unknown remote manifest agent agent="qwen"

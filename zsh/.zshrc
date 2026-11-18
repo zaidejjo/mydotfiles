@@ -130,6 +130,7 @@ alias .3='cd ../..'
 alias .4='cd ../../..'
 alias .5='cd ../../../..'
 alias rm='trash-put'
+alias delete='/bin/rm'
 alias mv='mv -i'
 alias cp='cp -i'
 alias reload='source ~/.zshrc'
@@ -169,10 +170,16 @@ alias dbsh='uv run manage.py dbshell'
 alias dcolstc='uv run manage.py collectstatic'
 alias dcheck='uv run manage.py check'
 
-# git
+# git and gh cli
+alias gs='git status'
+alias gpl='git pull'
 alias gcm='git switch main'
 alias gcd='git switch dev'
 alias gw='git switch'
+alias ghd='gh dash'
+
+# Opencode AI agent
+alias opc='opencode'
 
 # Wifi
 alias wifi='wlctl'
@@ -180,6 +187,12 @@ alias wifi='wlctl'
 # Media
 alias mpvfl='mpv --loop-file=yes'
 alias mpvpl='mpv --loop-playlist=inf'
+
+alias train='sl'
+alias sl='clear'
+
+# Remove Ctrl+z
+stty susp undef
 
 repeat_audio() {
   local input_file="$1"
@@ -471,3 +484,13 @@ export PATH="$HOME/go/bin:$PATH"
 eval "$(atuin init zsh)"
 bindkey '^[r' _atuin_search_widget
 # zprof
+
+export PATH="$HOME/.tokenharbor/bin:$PATH" # tokenharbor cli
+
+# >>> zz-lang >>>
+export PATH="$HOME/.zz/bin:$PATH"
+fpath=(~/.zfunc $fpath)
+# <<< zz-lang <<<
+
+# MiniMax Code CLI
+export PATH="/home/zaid/.minimax-code/bin:$PATH"

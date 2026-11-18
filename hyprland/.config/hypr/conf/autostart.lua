@@ -8,6 +8,7 @@ hl.on("hyprland.start", function()
 		wallpaper_app = f:read("*l"):match("^%s*(.-)%s*$")
 		f:close()
 	end
+	hl.exec_cmd("~/.config/hypr/scripts/auto-wallpaper.sh")
 
 	-- Export variables to systemd
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
@@ -63,6 +64,7 @@ hl.on("hyprland.start", function()
 
 	hl.exec_cmd("wl-paste --type text --watch cliphist store")
 	hl.exec_cmd("wl-paste --type image --watch cliphist store")
+	hl.exec_cmd("xhost +local:root")
 
 	hl.exec_cmd("quickshell -p ~/.config/quickshell/MediaPlayer")
 end)

@@ -36,8 +36,7 @@ color_blue = '#458588'
 color_aqua = '#689d6a'
 color_green = '#98971a'
 color_orange = '#d65d0e'
-color_purple = '#b16286'
-color_red = '#cc241d'
+color_purple = '#bcolor_red = '#cc241d'
 color_yellow = '#d79921'
 
 [palettes.catppuccin_mocha]
@@ -169,6 +168,13 @@ format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 symbol = ""
 style = "bg:teal"
 format = '[[ $symbol( $virtualenv) ](fg:base bg:teal)]($style)'
+
+[custom.zz]
+# command = "zz --version"
+detect_extensions = ["zz"]
+symbol = "zz"
+style = "bg:teal"
+format = '[[ $symbol($output) ](fg:base bg:teal)]($style)'
 
 [docker_context]
 symbol = ""

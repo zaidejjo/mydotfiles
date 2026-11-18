@@ -94,9 +94,14 @@ hl.bind(
 	hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-toggle-allfloat"),
 	{ description = "Toggle floating for all windows of workspace" }
 )
+-- hl.bind(
+-- 	mainMod .. " + period",
+-- 	hl.dsp.exec_cmd("~/.config/hypr/scripts/rofi-symbols.sh"),
+-- 	{ description = "Fast Emoji & Nerd Icons Picker" }
+-- )
 hl.bind(
 	mainMod .. " + period",
-	hl.dsp.exec_cmd("~/.config/hypr/scripts/rofi-symbols.sh"),
+	hl.dsp.exec_cmd("hypremoji"),
 	{ description = "Fast Emoji & Nerd Icons Picker" }
 )
 hl.bind(mainMod .. " + ALT + T", function()

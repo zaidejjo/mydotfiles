@@ -7,6 +7,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtMultimedia
 import Qt.labs.folderlistmodel
+import "BluetoothAudioService.qml"
 
 PanelWindow {
     id: root
@@ -209,6 +210,35 @@ PanelWindow {
         notifyProc.running = true;
     }
 
+    // --- BLUETOOTH / AUDIO OUTPUT SERVICE ---
+    BluetoothAudioService {
+        id: audioOutputService
+        onBluetoothDeviceConnected: {
+            console.log("onBluetoothDeviceConnected:", sinkId)
+            // Find the sink name and update audio output
+            for (var i = 0; i < audioOutputService.sinks.length; i++) {
+                if (audioOutputService.sinks[i].id === sinkId) {
+                    updateAudioOutputDevice(audioOutputService.sinks[i].name)
+                    break
+                }
+            }
+        }
+        onSinkFallback: {
+            console.log("onSinkFallback:", fromSinkId, "->", toSinkId)
+            // Find the fallback sink name and update audio output
+            for (var i = 0; i < audioOutputService.sinks.length; i++) {
+                if (audioOutputService.sinks[i].id === toSinkId) {
+                    updateAudioOutputDevice(audioOutputService.sinks[i].name)
+                    break
+                }
+            }
+        }
+        onSinkChanged: {
+            console.log("onSinkChanged:", sinkId, sinkName)
+            updateAudioOutputDevice(sinkName)
+        }
+    }
+
     // --- HYPRLAND FOCUS GRAB ---
     HyprlandFocusGrab {
         windows: [root]
@@ -232,6 +262,7 @@ PanelWindow {
     Shortcut { sequence: "L"; onActivated: cycleLoopMode() }
     Shortcut { sequence: "M"; onActivated: audioOut.muted = !audioOut.muted }
     Shortcut { sequence: "/"; onActivated: searchInput.forceActiveFocus() }
+    Shortcut { sequence: "Ctrl+Shift+A"; onActivated: audioOutputService.refreshSinks() }
 
     // NEW: Navigation shortcuts
     Shortcut { sequence: "Up"; onActivated: moveSelectionUp() }
@@ -262,6 +293,55 @@ PanelWindow {
         onMediaStatusChanged: {
             if (mediaStatus === MediaPlayer.EndOfMedia) handleMediaEnd()
         }
+    }
+
+    // Update AudioOutput device when sink changes
+    Connections {
+        target: audioOutputService
+        function onBluetoothDeviceConnected(sinkId) {
+            console.log("onBluetoothDeviceConnected:", sinkId)
+            for (var i = 0; i < audioOutputService.sinks.length; i++) {
+                if (audioOutputService.sinks[i].id === sinkId) {
+                    updateAudioOutputDevice(audioOutputService.sinks[i].name)
+                    break
+                }
+            }
+        }
+        function onSinkFallback(fromSinkId, toSinkId) {
+            console.log("onSinkFallback:", fromSinkId, "->", toSinkId)
+            for (var i = 0; i < audioOutputService.sinks.length; i++) {
+                if (audioOutputService.sinks[i].id === toSinkId) {
+                    updateAudioOutputDevice(audioOutputService.sinks[i].name)
+                    break
+                }
+            }
+        }
+        function onSinkChanged(sinkId, sinkName) {
+            console.log("onSinkChanged:", sinkId, sinkName)
+            updateAudioOutputDevice(sinkName)
+        }
+    }
+
+    // Function to update audio output device
+    function updateAudioOutputDevice(sinkName) {
+        console.log("updateAudioOutputDevice called with:", sinkName)
+        // Find matching QAudioDevice
+        var devices = QtMultimedia.QMediaDevices.audioOutputs()
+        console.log("QtMultimedia.QMediaDevices:", QtMultimedia.QMediaDevices)
+        console.log("devices:", devices)
+        console.log("devices.length:", devices ? devices.length : "null")
+        if (devices) {
+            for (var i = 0; i < devices.length; i++) {
+                var dev = devices[i]
+                console.log("  device[" + i + "]:", dev.description, "id:", dev.id)
+                if (dev.description.indexOf(sinkName) !== -1 || sinkName.indexOf(dev.description) !== -1) {
+                    audioOut.device = dev
+                    console.log("AudioOutput device set to:", dev.description)
+                    return
+                }
+            }
+        }
+        console.log("No matching audio device found for:", sinkName)
     }
 
     FolderListModel {
@@ -712,7 +792,8 @@ PanelWindow {
                                             }
 
                                             MouseArea {
-                                                anchors.fill: parent
+                                                Layout.fillWidth: true
+                                                Layout.fillHeight: true
                                                 onClicked: {
                                                     root.selectedIndex = index  // NEW
                                                     playTrack(index)
@@ -928,6 +1009,104 @@ PanelWindow {
                                         }
                                         contentItem: Text {
                                             text: audioOut.muted ? "Unmute (M)" : "Mute (M)"
+                                            color: "#cdd6f4"
+                                            font.pixelSize: 11
+                                        }
+                                    }
+                                }
+
+                                // Audio Output Selector
+                                Rectangle {
+                                    id: audioOutputSelector
+                                    implicitWidth: 160
+                                    implicitHeight: 28
+                                    radius: 8
+                                    color: "#2a2b3d"
+                                    border.color: audioOutputSelectorMouseArea.containsMouse ? "#cba6f7" : "#45475a"
+                                    border.width: 1
+                                    visible: !miniMode && audioOutputService.sinks.length > 0
+
+                                    RowLayout {
+                                        anchors.fill: parent
+                                        anchors.leftMargin: 10
+                                        anchors.rightMargin: 10
+                                        spacing: 6
+
+                                        Text {
+                                            text: "🔊"
+                                            color: "#cdd6f4"
+                                            font.pixelSize: 12
+                                        }
+
+                                        Text {
+                                            id: audioOutputLabel
+                                            text: audioOutputService.sinks.length > 0 ? 
+                                                (audioOutputService.sinks.find(s => s.id === audioOutputService.currentSinkId)?.name || "Default") : "Default"
+                                            color: "#cdd6f4"
+                                            font.pixelSize: 11
+                                            elide: Text.ElideRight
+                                            Layout.fillWidth: true
+                                        }
+
+                                        Text {
+                                            text: "▼"
+                                            color: "#6c7086"
+                                            font.pixelSize: 10
+                                        }
+                                    }
+
+                                    MouseArea {
+                                        id: audioOutputSelectorMouseArea
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onClicked: audioOutputMenu.open()
+                                        onContainsMouseChanged: {
+                                            // Handled by border.color binding
+                                        }
+                                    }
+
+                                    Menu {
+                                        id: audioOutputMenu
+                                        onAboutToShow: {
+                                            audioOutputMenu.clear()
+                                            for (var i = 0; i < audioOutputService.sinks.length; i++) {
+                                                var sink = audioOutputService.sinks[i]
+                                                var action = audioOutputMenu.addAction(sink.name + (sink.isDefault ? " ✓" : "") + (sink.isBluetooth ? " 🎧" : ""))
+                                                action.sinkId = sink.id
+                                                action.triggered.connect(function() {
+                                                    audioOutputService.setDefaultSink(this.sinkId)
+                                                })
+                                            }
+                                            if (audioOutputService.sinks.length > 0) {
+                                                audioOutputMenu.addSeparator()
+                                            }
+                                            var autoSwitchAction = audioOutputMenu.addAction((audioOutputService.autoSwitchToBluetooth ? "✓ " : "") + "Auto-switch to Bluetooth")
+                                            autoSwitchAction.checkable = true
+                                            autoSwitchAction.checked = audioOutputService.autoSwitchToBluetooth
+                                            autoSwitchAction.triggered.connect(function() {
+                                                audioOutputService.setAutoSwitchToBluetooth(this.checked)
+                                            })
+                                            audioOutputMenu.addSeparator()
+                                            var refreshAction = audioOutputMenu.addAction("🔄 Refresh devices")
+                                            refreshAction.triggered.connect(function() {
+                                                audioOutputService.refreshSinks()
+                                            })
+                                        }
+                                    }
+
+                                    ToolTip {
+                                        parent: parent
+                                        visible: audioOutputSelectorMouseArea.containsMouse
+                                        text: "Select audio output device"
+                                        delay: 400
+                                        background: Rectangle {
+                                            color: "#1e1e2e"
+                                            border.color: "#313244"
+                                            border.width: 1
+                                            radius: 6
+                                        }
+                                        contentItem: Text {
+                                            text: "Select audio output device"
                                             color: "#cdd6f4"
                                             font.pixelSize: 11
                                         }

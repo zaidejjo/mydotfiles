@@ -46,7 +46,7 @@ return {
       require("opencode").select()
     end, { desc = "Execute opencode action…" })
 
-    -- فتح وإغلاق الإضافة -> Leader + oo
+    -- Open/Close opencode: Leader + oo
     vim.keymap.set({ "n", "t" }, "<leader>oo", function()
       require("opencode").toggle()
     end, { desc = "Toggle opencode" })
